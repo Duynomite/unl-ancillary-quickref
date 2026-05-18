@@ -1,0 +1,2800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Ancillary Playbook · Quick Reference — Clear Path Coverage</title>
+  <meta name="description" content="In-call companion for CPC MA agents. Linear call-flow reference for surfacing UNL Hospital Indemnity + Home Healthcare on every Medicare Advantage call. Compliance + objections always visible.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=Jost:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+      --color-accent: #3DCEB2;
+      --color-secondary: #2D5A7A;
+      --color-text: #34252F;
+      --color-deep-navy: #10202C;
+      --color-light-cyan: #D8E6E3;
+      --color-mid-blue: #4B7797;
+      --color-soft-blue: #A7B8C5;
+      --font-heading: "Urbanist", sans-serif;
+      --font-body: "Jost", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+  </style>
+
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 130px; }
+    body { font-family: "Jost", sans-serif; color: #34252F; background: #f7f9fa; }
+    .font-heading { font-family: "Urbanist", sans-serif; }
+    .font-body { font-family: "Jost", sans-serif; }
+    .font-mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+    /* ============ JOURNEY BAR ============ */
+    .unl-journey-bar {
+      background: #10202C;
+      color: white;
+      font-family: "Urbanist", sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .unl-journey-inner {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      padding: 0.5rem 1.25rem;
+      max-width: 96rem;
+      margin: 0 auto;
+    }
+    .unl-journey-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .unl-journey-step:hover { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.05); }
+    .unl-journey-step.is-active { color: #3DCEB2; background: rgba(61,206,178,0.12); font-weight: 700; }
+    .unl-journey-step-num { font-family: "Urbanist", sans-serif; font-weight: 700; opacity: 0.6; }
+    .unl-journey-step.is-active .unl-journey-step-num { opacity: 1; }
+    .unl-journey-sep { color: rgba(255,255,255,0.3); }
+    @media (max-width: 640px) {
+      .unl-journey-inner { padding: 0.45rem 0.85rem; font-size: 0.58rem; gap: 0.25rem; }
+      .unl-journey-step { padding: 0.15rem 0.35rem; }
+    }
+    @media print { .unl-journey-bar { display: none !important; } }
+
+    /* ============ HEADER ============ */
+    .qr-header {
+      background: linear-gradient(180deg, #10202C 0%, #1a2f3e 100%);
+      color: white;
+      border-bottom: 3px solid #3DCEB2;
+    }
+    .qr-header-inner {
+      max-width: 96rem;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .qr-header-title {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+    .qr-header-sub {
+      font-family: "Urbanist", sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #A7B8C5;
+      margin-top: 0.15rem;
+    }
+    .qr-header-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #10202C;
+      background: #3DCEB2;
+      padding: 0.5rem 0.95rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: transform 0.12s, box-shadow 0.12s, background 0.12s;
+    }
+    .qr-header-cta:hover { background: #2db89e; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(61,206,178,0.3); }
+    .qr-header-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.06);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+    .qr-header-print:hover { background: rgba(255,255,255,0.12); color: white; }
+    @media (max-width: 640px) {
+      .qr-header-inner { padding: 0.7rem 1rem; gap: 0.5rem; }
+      .qr-header-title { font-size: 0.95rem; }
+    }
+
+    /* ============ THE MOTION strip ============ */
+    .qr-motion {
+      background: linear-gradient(135deg, #2D5A7A 0%, #10202C 100%);
+      color: white;
+      border-bottom: 1px solid rgba(61,206,178,0.3);
+    }
+    .qr-motion-inner {
+      max-width: 96rem;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 1.15rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+    @media (min-width: 768px) {
+      .qr-motion-inner { grid-template-columns: auto 1fr 1fr; align-items: center; gap: 1.5rem; padding: 0.95rem 1.5rem 1.1rem; }
+    }
+    .qr-motion-label {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #3DCEB2;
+    }
+    .qr-motion-label-line { font-size: 0.62rem; color: rgba(255,255,255,0.5); margin-top: 0.15rem; letter-spacing: 0.1em; }
+    .qr-motion-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-family: "Urbanist", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+    .qr-motion-step-num {
+      flex-shrink: 0;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: #3DCEB2;
+      color: #10202C;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-motion-step strong { color: #3DCEB2; font-weight: 700; }
+    .qr-motion-step em { color: white; font-style: normal; font-weight: 700; }
+
+    /* ============ MAIN — two-column with sticky sidebar ============ */
+    .qr-layout {
+      max-width: 96rem;
+      margin: 0 auto;
+      padding: 1.25rem 1.25rem 2rem;
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 1024px) {
+      .qr-layout {
+        grid-template-columns: minmax(0,1fr) 340px;
+        gap: 1.5rem;
+        padding: 1.5rem 1.5rem 2.5rem;
+        align-items: start;
+      }
+    }
+    .qr-main {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-width: 0;
+    }
+    .qr-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-width: 0;
+    }
+    @media (min-width: 1024px) {
+      .qr-sidebar {
+        position: sticky;
+        top: 130px;
+        max-height: calc(100vh - 145px);
+        overflow-y: auto;
+        padding-right: 4px;
+      }
+      .qr-sidebar::-webkit-scrollbar { width: 6px; }
+      .qr-sidebar::-webkit-scrollbar-track { background: transparent; }
+      .qr-sidebar::-webkit-scrollbar-thumb { background: rgba(45,90,122,0.2); border-radius: 3px; }
+      .qr-sidebar::-webkit-scrollbar-thumb:hover { background: rgba(45,90,122,0.4); }
+    }
+
+    /* ============ STAGE BADGE ============ */
+    .qr-stage {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.55rem;
+      border-radius: 4px;
+      background: rgba(45,90,122,0.1);
+      color: #2D5A7A;
+      border: 1px solid rgba(45,90,122,0.18);
+      line-height: 1;
+    }
+    .qr-stage::before {
+      content: "";
+      display: inline-block;
+      width: 0.32rem;
+      height: 0.32rem;
+      border-radius: 50%;
+      background: #2D5A7A;
+    }
+    .qr-stage.stage-open { background: rgba(75,119,151,0.1); color: #2D5A7A; border-color: rgba(75,119,151,0.22); }
+    .qr-stage.stage-open::before { background: #4B7797; }
+    .qr-stage.stage-discover { background: rgba(61,206,178,0.12); color: #1f6e5f; border-color: rgba(61,206,178,0.35); }
+    .qr-stage.stage-discover::before { background: #3DCEB2; }
+    .qr-stage.stage-tier { background: rgba(45,90,122,0.1); color: #2D5A7A; border-color: rgba(45,90,122,0.22); }
+    .qr-stage.stage-tier::before { background: #2D5A7A; }
+    .qr-stage.stage-pitch { background: rgba(61,206,178,0.18); color: #10202C; border-color: rgba(61,206,178,0.4); }
+    .qr-stage.stage-pitch::before { background: #3DCEB2; }
+    .qr-stage.stage-dq { background: rgba(217,119,6,0.12); color: #b45309; border-color: rgba(217,119,6,0.3); }
+    .qr-stage.stage-dq::before { background: #d97706; }
+    .qr-stage.stage-close { background: rgba(45,90,122,0.14); color: #10202C; border-color: rgba(45,90,122,0.3); }
+    .qr-stage.stage-close::before { background: #10202C; }
+    .qr-stage.stage-apply { background: rgba(75,119,151,0.12); color: #2D5A7A; border-color: rgba(75,119,151,0.25); }
+    .qr-stage.stage-apply::before { background: #4B7797; }
+    .qr-stage.stage-post { background: rgba(167,184,197,0.18); color: #34252F; border-color: rgba(167,184,197,0.4); }
+    .qr-stage.stage-post::before { background: #A7B8C5; }
+
+    /* ============ STEP CARD (numbered call-flow step) ============ */
+    .qr-step-card {
+      background: white;
+      border: 1px solid #D8E6E3;
+      border-radius: 0.85rem;
+      padding: 1.25rem 1.4rem 1.4rem;
+      box-shadow: 0 1px 3px rgba(45,90,122,0.04);
+      transition: box-shadow 0.18s, transform 0.18s;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .qr-step-card:hover { box-shadow: 0 4px 14px rgba(45,90,122,0.08); }
+    .qr-step-head {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+    }
+    .qr-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: 50%;
+      background: #2D5A7A;
+      color: white;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .qr-step-title {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.25;
+      color: #2D5A7A;
+      letter-spacing: -0.005em;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    @media (min-width: 768px) {
+      .qr-step-title { font-size: 1.2rem; }
+    }
+    .qr-step-title-time {
+      display: inline-block;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 500;
+      font-size: 0.7rem;
+      color: #4B7797;
+      margin-left: 0.5rem;
+      letter-spacing: 0;
+      vertical-align: 2px;
+    }
+
+    /* ============ CENTERPIECE variant (Rx reframe, Q1-Q4) ============ */
+    .qr-step-card.is-centerpiece {
+      background: linear-gradient(135deg, white 0%, rgba(216,230,227,0.45) 100%);
+      border: 1px solid rgba(45,90,122,0.22);
+      border-top: 5px solid #3DCEB2;
+      box-shadow: 0 4px 18px rgba(45,90,122,0.1);
+    }
+    .qr-step-card.is-centerpiece .qr-step-num {
+      background: #3DCEB2;
+      color: #10202C;
+    }
+    .qr-step-card.is-centerpiece .qr-step-title {
+      font-size: 1.25rem;
+    }
+    @media (min-width: 768px) {
+      .qr-step-card.is-centerpiece .qr-step-title { font-size: 1.4rem; }
+    }
+    .qr-centerpiece-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Urbanist", sans-serif;
+      font-size: 0.75rem;
+      color: #3DCEB2;
+      font-weight: 800;
+      margin-right: 0.1rem;
+    }
+
+    /* ============ DQ variant (mid-call DQ) ============ */
+    .qr-step-card.is-dq {
+      background: linear-gradient(135deg, rgba(217,119,6,0.05) 0%, white 60%);
+      border-color: rgba(217,119,6,0.3);
+      border-top: 4px solid #d97706;
+    }
+    .qr-step-card.is-dq .qr-step-num { background: #d97706; }
+
+    /* ============ Body prose inside cards ============ */
+    .qr-prose { line-height: 1.65; font-size: 0.94rem; color: #34252F; }
+    .qr-prose p { margin-bottom: 0.85rem; }
+    .qr-prose p:last-child { margin-bottom: 0; }
+    .qr-prose strong { color: #2D5A7A; font-weight: 600; }
+    .qr-prose em { font-style: italic; }
+    .qr-prose ul { list-style: none; padding: 0; margin: 0.5rem 0 0.85rem; }
+    .qr-prose ul li {
+      position: relative;
+      padding: 0.25rem 0 0.25rem 1.1rem;
+      line-height: 1.55;
+      font-size: 0.92rem;
+    }
+    .qr-prose ul li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #3DCEB2;
+      font-weight: 700;
+    }
+
+    /* ============ Verbatim quote ============ */
+    .qr-verbatim {
+      background: linear-gradient(to right, rgba(216,230,227,0.5) 0%, rgba(216,230,227,0.15) 100%);
+      border-left: 4px solid #2D5A7A;
+      border-radius: 0 0.5rem 0.5rem 0;
+      padding: 0.95rem 1.2rem 1rem;
+      margin: 0.85rem 0;
+      font-style: italic;
+      line-height: 1.6;
+      color: #34252F;
+      font-size: 0.94rem;
+    }
+    .qr-verbatim::before {
+      content: "VERBATIM";
+      display: block;
+      font-family: "Urbanist", sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      color: #2D5A7A;
+      margin-bottom: 0.35rem;
+    }
+    .qr-verbatim strong { font-style: normal; color: #2D5A7A; font-weight: 600; }
+    .qr-verbatim em { font-style: italic; }
+    .qr-verbatim.is-pitch {
+      background: linear-gradient(to right, rgba(61,206,178,0.12) 0%, rgba(61,206,178,0.02) 100%);
+      border-left-color: #3DCEB2;
+    }
+    .qr-verbatim.is-pitch::before { color: #1f6e5f; }
+    .qr-verbatim.is-warn {
+      background: linear-gradient(to right, rgba(217,119,6,0.08) 0%, rgba(217,119,6,0.01) 100%);
+      border-left-color: #d97706;
+    }
+    .qr-verbatim.is-warn::before { color: #b45309; }
+
+    /* ============ Centerpiece preference question block ============ */
+    .qr-preference-q {
+      background: linear-gradient(135deg, rgba(61,206,178,0.14) 0%, rgba(45,90,122,0.06) 100%);
+      border: 1px solid rgba(61,206,178,0.35);
+      border-radius: 0.75rem;
+      padding: 1.3rem 1.4rem 1.35rem;
+      margin: 0.6rem 0 0.85rem;
+      text-align: center;
+    }
+    .qr-preference-q-eyebrow {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #1f6e5f;
+      margin-bottom: 0.5rem;
+    }
+    .qr-preference-q-body {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      line-height: 1.45;
+      color: #10202C;
+      font-style: italic;
+    }
+    @media (min-width: 768px) {
+      .qr-preference-q-body { font-size: 1.15rem; }
+    }
+    .qr-preference-q-tag {
+      display: inline-block;
+      margin-top: 0.7rem;
+      font-family: "Urbanist", sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #2D5A7A;
+      background: rgba(61,206,178,0.2);
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+    }
+
+    /* ============ Tables ============ */
+    .qr-table-wrap { overflow-x: auto; margin: 0.5rem 0 0.4rem; }
+    table.qr-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.86rem;
+      background: white;
+      border: 1px solid #D8E6E3;
+      border-radius: 0.6rem;
+      overflow: hidden;
+    }
+    table.qr-table thead th {
+      background: #2D5A7A;
+      color: white;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      text-align: left;
+      padding: 0.55rem 0.75rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    table.qr-table tbody tr { border-top: 1px solid #D8E6E3; }
+    table.qr-table tbody tr:first-child { border-top: 0; }
+    table.qr-table tbody tr:nth-child(even) { background: rgba(216,230,227,0.18); }
+    table.qr-table td { padding: 0.55rem 0.75rem; vertical-align: top; line-height: 1.45; }
+    table.qr-table td strong { color: #2D5A7A; font-weight: 600; }
+    table.qr-table td em { font-style: italic; color: #34252F; }
+    table.qr-table.is-tight td { padding: 0.45rem 0.65rem; font-size: 0.84rem; }
+
+    /* ============ Filter rows (Medicaid / Medigap) ============ */
+    .qr-filter {
+      background: white;
+      border: 1px solid rgba(75,119,151,0.3);
+      border-left: 3px solid #4B7797;
+      border-radius: 0 0.5rem 0.5rem 0;
+      padding: 0.75rem 0.95rem 0.85rem;
+      margin-bottom: 0.6rem;
+    }
+    .qr-filter:last-child { margin-bottom: 0; }
+    .qr-filter-head {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.45rem;
+      flex-wrap: wrap;
+    }
+    .qr-filter-name {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #2D5A7A;
+    }
+    .qr-filter-q { font-style: italic; color: #34252F; font-size: 0.9rem; line-height: 1.55; }
+    .qr-filter-result { margin-top: 0.5rem; font-size: 0.88rem; line-height: 1.5; color: #34252F; }
+    .qr-filter-result strong { color: #2D5A7A; }
+    .qr-filter-action {
+      display: inline-block;
+      font-family: "Urbanist", sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 0.18rem 0.5rem;
+      border-radius: 3px;
+      line-height: 1.2;
+    }
+    .qr-filter-action.is-dq { background: rgba(185,28,28,0.1); color: #b91c1c; }
+    .qr-filter-action.is-skip { background: rgba(217,119,6,0.12); color: #b45309; }
+
+    /* ============ Knockout chips ============ */
+    .qr-ko-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.45rem; }
+    .qr-ko-chip {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 600;
+      font-size: 0.72rem;
+      background: rgba(185,28,28,0.07);
+      color: #b91c1c;
+      border: 1px solid rgba(185,28,28,0.22);
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      line-height: 1.2;
+    }
+
+    /* ============ Inline mini badges ============ */
+    .qr-mini {
+      display: inline-block;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.12rem 0.4rem;
+      border-radius: 3px;
+      vertical-align: 1px;
+    }
+    .qr-mini-accent { background: rgba(61,206,178,0.2); color: #10202C; }
+    .qr-mini-blue { background: rgba(45,90,122,0.12); color: #2D5A7A; }
+    .qr-mini-red { background: rgba(185,28,28,0.1); color: #b91c1c; }
+
+    /* ============ Q1-Q4 question rows ============ */
+    .qr-q-list { margin: 0.5rem 0 0.4rem; }
+    .qr-q-item {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 0.7rem;
+      padding: 0.7rem 0;
+      border-top: 1px dashed rgba(45,90,122,0.18);
+      align-items: start;
+    }
+    .qr-q-item:first-child { border-top: 0; padding-top: 0.25rem; }
+    .qr-q-tag {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.78rem;
+      color: white;
+      background: #2D5A7A;
+      padding: 0.18rem 0.4rem;
+      border-radius: 4px;
+      text-align: center;
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+    }
+    .qr-q-tag.is-apply { background: #3DCEB2; color: #10202C; }
+    .qr-q-text {
+      font-style: italic;
+      font-size: 0.94rem;
+      line-height: 1.55;
+      color: #34252F;
+    }
+    .qr-q-text strong { color: #2D5A7A; font-style: normal; font-weight: 600; }
+    .qr-q-note {
+      display: block;
+      margin-top: 0.25rem;
+      font-style: normal;
+      font-size: 0.78rem;
+      color: #4B7797;
+      line-height: 1.45;
+    }
+
+    /* ============ Post-sale checklist rows ============ */
+    .qr-checklist { margin: 0.4rem 0 0.5rem; }
+    .qr-check {
+      display: grid;
+      grid-template-columns: 1.6rem 1fr;
+      gap: 0.6rem;
+      padding: 0.55rem 0;
+      border-top: 1px dashed rgba(45,90,122,0.18);
+      align-items: start;
+    }
+    .qr-check:first-child { border-top: 0; padding-top: 0.2rem; }
+    .qr-check-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid #3DCEB2;
+      color: #2D5A7A;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.75rem;
+      line-height: 1;
+    }
+    .qr-check.is-hot .qr-check-num {
+      background: #3DCEB2;
+      color: #10202C;
+      border-color: #3DCEB2;
+    }
+    .qr-check-label {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #2D5A7A;
+      line-height: 1.3;
+      margin-bottom: 0.1rem;
+    }
+    .qr-check-label .qr-star { color: #3DCEB2; font-weight: 900; margin-right: 0.2rem; }
+    .qr-check-q {
+      font-style: italic;
+      font-size: 0.85rem;
+      line-height: 1.45;
+      color: #34252F;
+    }
+
+    /* ============ Combined math rows ============ */
+    .qr-math {
+      background: rgba(216,230,227,0.35);
+      border: 1px solid #D8E6E3;
+      border-radius: 0.6rem;
+      padding: 0.85rem 1rem;
+      margin: 0.6rem 0;
+    }
+    .qr-math-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.32rem 0;
+      font-size: 0.9rem;
+    }
+    .qr-math-row + .qr-math-row { border-top: 1px dashed rgba(45,90,122,0.15); }
+    .qr-math-label { color: #34252F; }
+    .qr-math-label strong { color: #2D5A7A; font-weight: 600; }
+    .qr-math-value {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #2D5A7A;
+      white-space: nowrap;
+    }
+    .qr-math-row.is-credit .qr-math-value { color: #1f6e5f; }
+    .qr-math-row.is-credit .qr-math-label { color: #4B7797; font-style: italic; }
+    .qr-math-row.is-total {
+      border-top: 2px solid #2D5A7A !important;
+      padding-top: 0.55rem;
+      margin-top: 0.2rem;
+    }
+    .qr-math-row.is-total .qr-math-value {
+      color: #10202C;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.98rem;
+    }
+    .qr-math-row.is-total .qr-math-label { font-weight: 700; color: #10202C; }
+
+    /* ============ Customer payoff strip ============ */
+    .qr-payoff {
+      margin-top: 0.7rem;
+      background: linear-gradient(135deg, rgba(45,90,122,0.06) 0%, rgba(61,206,178,0.08) 100%);
+      border-radius: 0.55rem;
+      padding: 0.7rem 0.95rem;
+      font-size: 0.86rem;
+      color: #34252F;
+      line-height: 1.55;
+    }
+    .qr-payoff strong { color: #2D5A7A; font-weight: 600; }
+    .qr-payoff-label {
+      display: block;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #1f6e5f;
+      margin-bottom: 0.3rem;
+    }
+
+    /* ============ SIDEBAR CARDS ============ */
+    .qr-side-card {
+      background: white;
+      border-radius: 0.85rem;
+      border: 1px solid #D8E6E3;
+      padding: 1.1rem 1.2rem 1.2rem;
+      box-shadow: 0 1px 3px rgba(45,90,122,0.04);
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .qr-side-card.is-compliance {
+      background: linear-gradient(135deg, rgba(185,28,28,0.05) 0%, white 65%);
+      border: 1px solid rgba(185,28,28,0.25);
+      border-top: 4px solid #b91c1c;
+    }
+    .qr-side-card.is-objections {
+      border-top: 4px solid #3DCEB2;
+    }
+    .qr-side-head {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+    }
+    .qr-side-eyebrow {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #b91c1c;
+    }
+    .qr-side-card.is-objections .qr-side-eyebrow { color: #1f6e5f; }
+    .qr-side-title {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      line-height: 1.2;
+      color: #b91c1c;
+      letter-spacing: -0.005em;
+    }
+    .qr-side-card.is-objections .qr-side-title { color: #2D5A7A; }
+    .qr-side-title .qr-star { color: #b91c1c; font-weight: 900; margin-right: 0.15rem; }
+    .qr-side-card.is-objections .qr-side-title .qr-star { color: #3DCEB2; }
+
+    /* ============ Never-say table ============ */
+    table.qr-never {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.78rem;
+      background: white;
+      border: 1px solid rgba(185,28,28,0.18);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      table-layout: fixed;
+    }
+    table.qr-never thead th {
+      background: #b91c1c;
+      color: white;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      text-align: left;
+      padding: 0.45rem 0.6rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    table.qr-never thead th:first-child { background: linear-gradient(90deg, #b91c1c 0%, #991b1b 100%); }
+    table.qr-never thead th:last-child { background: linear-gradient(90deg, #2D5A7A 0%, #1f4459 100%); }
+    table.qr-never tbody tr { border-top: 1px solid rgba(185,28,28,0.12); }
+    table.qr-never tbody tr:first-child { border-top: 0; }
+    table.qr-never td {
+      padding: 0.5rem 0.6rem;
+      line-height: 1.4;
+      vertical-align: top;
+      font-size: 0.76rem;
+    }
+    table.qr-never td:first-child {
+      color: #b91c1c;
+      font-weight: 500;
+      background: rgba(185,28,28,0.04);
+    }
+    table.qr-never td:last-child { color: #34252F; }
+    table.qr-never td strong { color: #2D5A7A; font-weight: 600; }
+
+    /* ============ Forbidden footer in compliance ============ */
+    .qr-forbidden {
+      margin-top: 0.85rem;
+      padding: 0.7rem 0.85rem;
+      background: rgba(185,28,28,0.06);
+      border-left: 3px solid #b91c1c;
+      border-radius: 0 0.4rem 0.4rem 0;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: #34252F;
+    }
+    .qr-forbidden strong { color: #b91c1c; font-weight: 700; }
+    .qr-forbidden-note {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 0.72rem;
+      color: #4B7797;
+      font-style: italic;
+    }
+
+    /* ============ Objection items (sidebar) ============ */
+    .qr-obj { padding: 0.65rem 0 0.6rem; border-top: 1px dashed rgba(45,90,122,0.18); }
+    .qr-obj:first-of-type { border-top: 0; padding-top: 0.1rem; }
+    .qr-obj-head {
+      display: flex;
+      align-items: baseline;
+      gap: 0.45rem;
+      margin-bottom: 0.35rem;
+    }
+    .qr-obj-num {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700;
+      font-size: 0.7rem;
+      color: white;
+      background: #2D5A7A;
+      width: 1.3rem;
+      height: 1.3rem;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .qr-obj-q {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 0.84rem;
+      color: #2D5A7A;
+      line-height: 1.3;
+    }
+    .qr-obj-a {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #34252F;
+      padding-left: 1.75rem;
+    }
+    .qr-obj-a em { font-style: italic; color: #1f6e5f; }
+    .qr-obj-a strong { color: #2D5A7A; font-weight: 600; }
+
+    /* ============ Discover question lists (NEPQ) ============ */
+    .qr-seed { margin-bottom: 0.7rem; }
+    .qr-seed:last-child { margin-bottom: 0; }
+    .qr-seed-label {
+      display: inline-block;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #2D5A7A;
+      background: rgba(45,90,122,0.08);
+      padding: 0.18rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.4rem;
+    }
+    .qr-seed-q {
+      font-style: italic;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #34252F;
+      padding: 0.2rem 0 0.2rem 0.85rem;
+      border-left: 3px solid rgba(61,206,178,0.4);
+    }
+
+    /* ============ Loop tip footer ============ */
+    .qr-tip {
+      margin-top: 0.7rem;
+      padding: 0.55rem 0.85rem;
+      background: rgba(75,119,151,0.06);
+      border-radius: 0.4rem;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      color: #4B7797;
+    }
+    .qr-tip strong { color: #2D5A7A; font-weight: 700; }
+    .qr-tip em { color: #34252F; font-style: italic; }
+
+    /* ============ Killer-of-Q2 callout ============ */
+    .qr-kill {
+      margin-top: 0.9rem;
+      background: rgba(217,119,6,0.07);
+      border-left: 4px solid #d97706;
+      border-radius: 0 0.5rem 0.5rem 0;
+      padding: 0.7rem 0.95rem 0.85rem;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: #34252F;
+    }
+    .qr-kill-label {
+      display: block;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #b45309;
+      margin-bottom: 0.3rem;
+    }
+    .qr-kill strong { color: #b45309; font-weight: 600; }
+    .qr-kill em { font-style: italic; color: #2D5A7A; font-weight: 500; }
+
+    /* ============ Pre-check chips (Q1-Q4) ============ */
+    .qr-precheck {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.4rem 0 0.7rem;
+    }
+    .qr-precheck-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      background: rgba(61,206,178,0.12);
+      color: #1f6e5f;
+      border: 1px solid rgba(61,206,178,0.3);
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+    }
+    .qr-precheck-chip::before { content: "✓"; font-weight: 900; color: #3DCEB2; }
+
+    /* ============ Rx submission block ============ */
+    .qr-rx-block {
+      margin-top: 0.85rem;
+      background: rgba(45,90,122,0.05);
+      border: 1px solid rgba(45,90,122,0.18);
+      border-radius: 0.55rem;
+      padding: 0.75rem 0.95rem 0.85rem;
+    }
+    .qr-rx-label {
+      display: block;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #2D5A7A;
+      margin-bottom: 0.45rem;
+    }
+    .qr-rx-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.85rem;
+      font-size: 0.84rem;
+      line-height: 1.55;
+      color: #34252F;
+    }
+    .qr-rx-row strong { color: #2D5A7A; font-weight: 600; }
+    .qr-rx-row code {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      background: white;
+      border: 1px solid rgba(45,90,122,0.18);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      color: #2D5A7A;
+    }
+
+    /* ============ TOC strip (small in-page jumps) ============ */
+    .qr-toc {
+      background: white;
+      border: 1px solid #D8E6E3;
+      border-radius: 0.75rem;
+      padding: 0.85rem 1rem 0.95rem;
+      box-shadow: 0 1px 3px rgba(45,90,122,0.04);
+    }
+    .qr-toc-label {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #4B7797;
+      margin-bottom: 0.55rem;
+    }
+    .qr-toc-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .qr-toc-link {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: #2D5A7A;
+      background: rgba(216,230,227,0.5);
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .qr-toc-link:hover {
+      background: rgba(61,206,178,0.18);
+      color: #10202C;
+      border-color: rgba(61,206,178,0.4);
+    }
+    .qr-toc-num {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700;
+      color: #4B7797;
+      margin-right: 0.25rem;
+    }
+
+    /* ============ TABS ============ */
+    /* Tabs sit BELOW the sticky header. Header is ~60-65px tall (varies by breakpoint).
+       Using a small top offset keeps the tab bar visually anchored under the header
+       once the user has scrolled past the Motion strip. */
+    .qr-tabs {
+      background: white;
+      border-bottom: 1px solid #D8E6E3;
+      position: sticky;
+      top: 60px;
+      z-index: 30;
+      box-shadow: 0 1px 4px rgba(45,90,122,0.06);
+    }
+    @media (max-width: 640px) {
+      .qr-tabs { top: 56px; }
+    }
+    .qr-tabs-inner {
+      max-width: 96rem;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      gap: 0.25rem;
+      align-items: stretch;
+    }
+    .qr-tab {
+      background: transparent;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      padding: 0.95rem 1.25rem 0.85rem;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      color: #4B7797;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+      line-height: 1.1;
+    }
+    .qr-tab:hover { color: #2D5A7A; background: rgba(216,230,227,0.4); }
+    .qr-tab:focus-visible { outline: 2px solid #3DCEB2; outline-offset: -2px; }
+    .qr-tab.is-active {
+      color: #10202C;
+      border-bottom-color: #3DCEB2;
+      background: rgba(61,206,178,0.06);
+    }
+    .qr-tab-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 50%;
+      background: rgba(45,90,122,0.12);
+      color: #2D5A7A;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.72rem;
+      flex-shrink: 0;
+    }
+    .qr-tab.is-active .qr-tab-num {
+      background: #3DCEB2;
+      color: #10202C;
+    }
+    .qr-tab-meta {
+      display: none;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 500;
+      font-size: 0.66rem;
+      letter-spacing: 0.06em;
+      color: #4B7797;
+      text-transform: uppercase;
+      margin-left: 0.35rem;
+    }
+    @media (min-width: 640px) {
+      .qr-tab-meta { display: inline; }
+    }
+    @media (max-width: 640px) {
+      .qr-tabs-inner { padding: 0 0.85rem; }
+      .qr-tab { padding: 0.7rem 0.75rem 0.6rem; font-size: 0.78rem; gap: 0.4rem; }
+      .qr-tab-num { width: 1.2rem; height: 1.2rem; font-size: 0.65rem; }
+    }
+    .qr-tab-panel { display: none; }
+    .qr-tab-panel.is-active { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+    @media print {
+      .qr-tabs { display: none !important; }
+      .qr-tab-panel { display: flex !important; flex-direction: column; gap: 1rem; }
+      .qr-tab-panel + .qr-tab-panel { page-break-before: always; }
+    }
+
+    /* ============ NEW STAGE VARIANTS ============ */
+    .qr-stage.stage-faq { background: rgba(75,119,151,0.1); color: #2D5A7A; border-color: rgba(75,119,151,0.22); }
+    .qr-stage.stage-faq::before { background: #4B7797; }
+    .qr-stage.stage-read { background: rgba(45,90,122,0.12); color: #2D5A7A; border-color: rgba(45,90,122,0.25); }
+    .qr-stage.stage-read::before { background: #2D5A7A; }
+    .qr-stage.stage-preempt { background: rgba(217,119,6,0.1); color: #b45309; border-color: rgba(217,119,6,0.25); }
+    .qr-stage.stage-preempt::before { background: #d97706; }
+    .qr-stage.stage-phase { background: rgba(45,90,122,0.12); color: #2D5A7A; border-color: rgba(45,90,122,0.25); }
+    .qr-stage.stage-phase::before { background: #2D5A7A; }
+    .qr-stage.stage-lexicon { background: rgba(75,119,151,0.12); color: #2D5A7A; border-color: rgba(75,119,151,0.3); }
+    .qr-stage.stage-lexicon::before { background: #4B7797; }
+
+    /* ============ LEXICON CARD ============ */
+    .qr-step-card.is-lexicon {
+      background: linear-gradient(135deg, rgba(75,119,151,0.04) 0%, white 60%);
+      border-color: rgba(75,119,151,0.25);
+      border-left: 4px solid #4B7797;
+    }
+    .qr-step-card.is-lexicon .qr-step-num { background: #4B7797; }
+    .qr-lexicon-intro {
+      font-size: 0.86rem;
+      color: #4B7797;
+      line-height: 1.5;
+      margin-bottom: 0.7rem;
+    }
+    .qr-lexicon-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid rgba(75,119,151,0.18);
+    }
+    @media (min-width: 640px) {
+      .qr-lexicon-grid { grid-template-columns: minmax(0, 0.6fr) minmax(0, 1.4fr); }
+    }
+    .qr-lex-term, .qr-lex-def {
+      padding: 0.55rem 0.7rem;
+      border-bottom: 1px solid rgba(75,119,151,0.12);
+      line-height: 1.45;
+      font-size: 0.86rem;
+    }
+    .qr-lex-term {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      color: #2D5A7A;
+      background: rgba(216,230,227,0.18);
+    }
+    .qr-lex-def {
+      color: #34252F;
+    }
+    .qr-lex-def strong { color: #2D5A7A; font-weight: 600; }
+    @media (max-width: 639px) {
+      .qr-lex-term { border-bottom: 0; padding-bottom: 0.1rem; font-size: 0.88rem; }
+      .qr-lex-def { padding-top: 0.15rem; padding-bottom: 0.7rem; }
+    }
+
+    /* ============ FAQ rows ============ */
+    .qr-faq-list { margin: 0.4rem 0 0; }
+    .qr-faq-row {
+      padding: 0.75rem 0;
+      border-top: 1px dashed rgba(45,90,122,0.18);
+    }
+    .qr-faq-row:first-child { border-top: 0; padding-top: 0.3rem; }
+    .qr-faq-q {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #2D5A7A;
+      line-height: 1.35;
+      margin-bottom: 0.35rem;
+    }
+    .qr-faq-q::before { content: "Q. "; color: #4B7797; font-weight: 600; }
+    .qr-faq-a {
+      font-style: italic;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #34252F;
+      padding-left: 1rem;
+      border-left: 3px solid rgba(61,206,178,0.4);
+    }
+    .qr-faq-a::before {
+      content: "A. ";
+      font-style: normal;
+      color: #1f6e5f;
+      font-weight: 700;
+      font-family: "Urbanist", sans-serif;
+      letter-spacing: 0.04em;
+      font-size: 0.78rem;
+      vertical-align: 1px;
+    }
+
+    /* ============ Profile decoder rows ============ */
+    .qr-decoder { margin: 0.4rem 0 0; }
+    .qr-decoder-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+      padding: 0.7rem 0;
+      border-top: 1px dashed rgba(45,90,122,0.18);
+    }
+    @media (min-width: 768px) {
+      .qr-decoder-row {
+        grid-template-columns: 1.05fr 0.85fr 1.3fr;
+        gap: 0.85rem;
+        align-items: start;
+      }
+    }
+    .qr-decoder-row:first-child { border-top: 0; padding-top: 0.25rem; }
+    .qr-decoder-cell-label {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.56rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #4B7797;
+      margin-bottom: 0.18rem;
+      display: block;
+    }
+    .qr-decoder-cue {
+      font-style: italic;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: #34252F;
+    }
+    .qr-decoder-cue strong { font-style: normal; color: #2D5A7A; font-weight: 600; }
+    .qr-decoder-profile {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #2D5A7A;
+      line-height: 1.35;
+    }
+    .qr-decoder-tactic {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #34252F;
+    }
+    .qr-decoder-tactic strong { color: #1f6e5f; font-weight: 600; }
+
+    /* ============ Pre-emptive reframes ============ */
+    .qr-reframe { margin: 0.4rem 0 0; }
+    .qr-reframe-row {
+      padding: 0.75rem 0;
+      border-top: 1px dashed rgba(217,119,6,0.22);
+    }
+    .qr-reframe-row:first-child { border-top: 0; padding-top: 0.3rem; }
+    .qr-reframe-cue {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #b45309;
+      background: rgba(217,119,6,0.1);
+      border: 1px solid rgba(217,119,6,0.25);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .qr-reframe-body {
+      font-style: italic;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #34252F;
+      padding: 0.7rem 0.95rem;
+      background: linear-gradient(to right, rgba(217,119,6,0.06) 0%, rgba(217,119,6,0.01) 100%);
+      border-left: 4px solid #d97706;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    /* ============ HHC trigger inline block ============ */
+    .qr-trigger {
+      margin-top: 0.85rem;
+      padding: 0.7rem 0.95rem;
+      background: rgba(61,206,178,0.08);
+      border-left: 3px solid #3DCEB2;
+      border-radius: 0 0.45rem 0.45rem 0;
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: #34252F;
+    }
+    .qr-trigger strong { color: #1f6e5f; font-weight: 700; }
+    .qr-trigger em { color: #2D5A7A; font-style: normal; font-weight: 600; }
+
+    /* ============ SCRIPT TAB — phase cards ============ */
+    .qr-script-intro {
+      background: linear-gradient(135deg, rgba(45,90,122,0.06) 0%, rgba(61,206,178,0.08) 100%);
+      border: 1px solid rgba(45,90,122,0.18);
+      border-radius: 0.85rem;
+      padding: 1.25rem 1.4rem 1.35rem;
+      box-shadow: 0 1px 3px rgba(45,90,122,0.04);
+    }
+    .qr-script-intro-eyebrow {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #1f6e5f;
+      margin-bottom: 0.4rem;
+    }
+    .qr-script-intro-title {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      line-height: 1.25;
+      color: #10202C;
+      margin-bottom: 0.5rem;
+    }
+    .qr-script-intro-body {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #34252F;
+    }
+    .qr-script-intro-body strong { color: #2D5A7A; font-weight: 600; }
+
+    .qr-phase-card {
+      background: white;
+      border: 1px solid #D8E6E3;
+      border-radius: 0.85rem;
+      padding: 1.25rem 1.4rem 1.4rem;
+      box-shadow: 0 1px 3px rgba(45,90,122,0.04);
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .qr-phase-card.is-harvest {
+      background: linear-gradient(135deg, white 0%, rgba(216,230,227,0.45) 100%);
+      border: 1px solid rgba(45,90,122,0.22);
+      border-top: 5px solid #3DCEB2;
+      box-shadow: 0 4px 18px rgba(45,90,122,0.1);
+    }
+    .qr-phase-card.is-pivot {
+      background: linear-gradient(135deg, rgba(217,119,6,0.05) 0%, white 60%);
+      border-color: rgba(217,119,6,0.3);
+      border-top: 5px solid #d97706;
+      box-shadow: 0 4px 18px rgba(217,119,6,0.1);
+    }
+    .qr-phase-head {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .qr-phase-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: #2D5A7A;
+      color: white;
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      letter-spacing: -0.02em;
+    }
+    .qr-phase-card.is-harvest .qr-phase-num { background: #3DCEB2; color: #10202C; }
+    .qr-phase-card.is-pivot .qr-phase-num { background: #d97706; color: white; }
+    .qr-phase-eyebrow {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #4B7797;
+    }
+    .qr-phase-title {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.25;
+      color: #2D5A7A;
+      letter-spacing: -0.005em;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    @media (min-width: 768px) {
+      .qr-phase-title { font-size: 1.18rem; }
+    }
+    .qr-phase-card.is-harvest .qr-phase-title { color: #10202C; }
+    .qr-phase-card.is-pivot .qr-phase-title { color: #10202C; }
+    .qr-phase-star {
+      color: #3DCEB2;
+      font-weight: 900;
+      margin-right: 0.15rem;
+    }
+    .qr-phase-card.is-pivot .qr-phase-star { color: #d97706; }
+    .qr-phase-sub {
+      font-family: "Urbanist", sans-serif;
+      font-size: 0.82rem;
+      color: #4B7797;
+      font-weight: 500;
+      margin-bottom: 0.85rem;
+      line-height: 1.4;
+    }
+    .qr-phase-body { line-height: 1.6; font-size: 0.92rem; color: #34252F; }
+    .qr-phase-body p { margin-bottom: 0.7rem; }
+    .qr-phase-body p:last-child { margin-bottom: 0; }
+    .qr-phase-body strong { color: #2D5A7A; font-weight: 600; }
+    .qr-phase-body em { font-style: italic; }
+    .qr-phase-note {
+      margin: 0.65rem 0 0.4rem;
+      font-size: 0.84rem;
+      color: #4B7797;
+      font-style: italic;
+      line-height: 1.5;
+      padding: 0.35rem 0 0;
+    }
+    .qr-phase-note strong { color: #2D5A7A; font-style: normal; font-weight: 600; }
+    .qr-phase-q-list {
+      margin: 0.5rem 0 0;
+      list-style: none;
+      padding: 0;
+    }
+    .qr-phase-q-list li {
+      padding: 0.4rem 0 0.4rem 1.1rem;
+      position: relative;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: #34252F;
+      border-top: 1px dashed rgba(45,90,122,0.15);
+    }
+    .qr-phase-q-list li:first-child { border-top: 0; padding-top: 0.2rem; }
+    .qr-phase-q-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #3DCEB2;
+      font-weight: 900;
+      top: 0.4rem;
+    }
+    .qr-phase-q-list strong { color: #2D5A7A; font-weight: 600; }
+    .qr-phase-q-list em { font-style: italic; }
+
+    .qr-reference-card {
+      background: linear-gradient(135deg, rgba(185,28,28,0.04) 0%, white 60%);
+      border: 1px solid rgba(45,90,122,0.18);
+      border-top: 4px solid #2D5A7A;
+      border-radius: 0.85rem;
+      padding: 1.25rem 1.4rem 1.4rem;
+      box-shadow: 0 1px 3px rgba(45,90,122,0.04);
+      page-break-inside: avoid;
+    }
+    .qr-reference-eyebrow {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #2D5A7A;
+      margin-bottom: 0.4rem;
+    }
+    .qr-reference-title {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      line-height: 1.25;
+      color: #10202C;
+      margin-bottom: 0.85rem;
+    }
+    .qr-reference-label {
+      font-family: "Urbanist", sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #2D5A7A;
+      margin: 0.95rem 0 0.4rem;
+      display: block;
+    }
+    .qr-reference-label:first-of-type { margin-top: 0; }
+
+    /* ============ FOOTER ============ */
+    .qr-footer {
+      background: #10202C;
+      color: rgba(255,255,255,0.8);
+      padding: 1.5rem 1.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      font-family: "Urbanist", sans-serif;
+      letter-spacing: 0.06em;
+    }
+    .qr-footer strong { color: #3DCEB2; font-weight: 700; }
+    .qr-footer a { color: #3DCEB2; text-decoration: none; border-bottom: 1px dotted rgba(61,206,178,0.5); }
+    .qr-footer a:hover { color: white; border-bottom-color: white; }
+    .qr-footer-pipe { color: rgba(255,255,255,0.3); margin: 0 0.6rem; }
+
+    /* ============ Print styles ============ */
+    @media print {
+      html { scroll-padding-top: 0; }
+      body { background: white; }
+      .qr-header, .unl-journey-bar, .qr-header-print, .qr-header-cta, .qr-toc { display: none !important; }
+      .qr-motion { background: #10202C !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 0.5rem 0.75rem; }
+      .qr-motion-inner { padding: 0.4rem 0.75rem; gap: 0.4rem; }
+      .qr-motion-step { font-size: 0.78rem; }
+      .qr-layout {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem !important;
+        padding: 0.5rem 0.5rem !important;
+      }
+      .qr-sidebar {
+        position: static !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+      .qr-step-card, .qr-side-card, .qr-phase-card, .qr-script-intro, .qr-reference-card {
+        padding: 0.65rem 0.85rem 0.75rem;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+      .qr-step-card.is-centerpiece, .qr-side-card.is-compliance, .qr-side-card.is-objections {
+        background: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .qr-verbatim, .qr-preference-q { padding: 0.5rem 0.7rem; font-size: 0.78rem; line-height: 1.4; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .qr-table { font-size: 0.72rem; }
+      .qr-table td { padding: 0.3rem 0.5rem; }
+      .qr-never td { font-size: 0.68rem; padding: 0.32rem 0.45rem; }
+      .qr-q-item, .qr-check, .qr-obj { padding: 0.35rem 0; }
+      .qr-step-title { font-size: 0.95rem; }
+      .qr-footer { padding: 0.5rem 0.75rem; font-size: 0.65rem; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body class="bg-white text-text font-body">
+
+  <!-- ============ JOURNEY BAR ============ -->
+  <div class="unl-journey-bar">
+    <div class="unl-journey-inner">
+      <a href="https://clearpathcoverage.com/unl-ancillary-playbook/" target="_top" rel="noopener" class="unl-journey-step">
+        <span class="unl-journey-step-num">1.</span>
+        <span>Ancillary Playbook</span>
+      </a>
+      <span class="unl-journey-sep">›</span>
+      <span class="unl-journey-step is-active">
+        <span class="unl-journey-step-num">2.</span>
+        <span>Quick Reference</span>
+      </span>
+      <span class="unl-journey-sep">›</span>
+      <a href="https://clearpathcoverage.com/unl-ancillary-agent-compensation/" target="_top" rel="noopener" class="unl-journey-step">
+        <span class="unl-journey-step-num">3.</span>
+        <span>Comp Model</span>
+      </a>
+      <span class="unl-journey-sep">›</span>
+      <a href="https://clearpathcoverage.com/unl-rx-calculator/" target="_top" rel="noopener" class="unl-journey-step">
+        <span class="unl-journey-step-num">4.</span>
+        <span>Rx Calculator</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ HEADER (sticky) ============ -->
+  <header class="qr-header sticky top-0 z-40">
+    <div class="qr-header-inner">
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center justify-center w-9 h-9 rounded bg-accent/20 border border-accent/30 shrink-0">
+          <svg viewBox="0 0 20 20" fill="none" class="w-5 h-5">
+            <path d="M3 10L8 15L17 5" stroke="#3DCEB2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="qr-header-title">The Ancillary Playbook · Quick Reference</div>
+          <div class="qr-header-sub">Clear Path Coverage · Keep open during calls</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="window.print()" class="qr-header-print" aria-label="Print this page">
+          <svg viewBox="0 0 16 16" fill="none" class="w-3.5 h-3.5"><path d="M4 6V3h8v3M4 12H2v-4a1 1 0 011-1h10a1 1 0 011 1v4h-2M4 10h8v4H4v-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Print
+        </button>
+        <a href="https://clearpathcoverage.com/unl-ancillary-playbook/" target="_top" rel="noopener" class="qr-header-cta">
+          Ancillary Playbook
+          <svg viewBox="0 0 12 12" fill="none" class="w-3 h-3"><path d="M3 6h6M6 3l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ THE MOTION strip ============ -->
+  <section class="qr-motion">
+    <div class="qr-motion-inner">
+      <div>
+        <div class="qr-motion-label">The Motion</div>
+        <div class="qr-motion-label-line">Every MA call · Every fit</div>
+      </div>
+      <div class="qr-motion-step">
+        <span class="qr-motion-step-num">1</span>
+        <span>Take the MA lead. <em>Try to sell MA.</em></span>
+      </div>
+      <div class="qr-motion-step">
+        <span class="qr-motion-step-num">2</span>
+        <span>Whether MA sold or not, <em>surface BOTH Hospital Indemnity (HI) and Home Healthcare (HHC).</em> <strong>Default = surface both.</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TABS (sticky below header + motion) ============ -->
+  <nav class="qr-tabs" aria-label="Reference views">
+    <div class="qr-tabs-inner" role="tablist">
+      <button id="tab-btn-quick" class="qr-tab is-active" role="tab" aria-selected="true" aria-controls="tab-panel-quick" data-tab-target="quick" type="button">
+        <span class="qr-tab-num">1</span>
+        <span>Quick Reference</span>
+        <span class="qr-tab-meta">In-call card deck</span>
+      </button>
+      <button id="tab-btn-script" class="qr-tab" role="tab" aria-selected="false" aria-controls="tab-panel-script" data-tab-target="script" type="button">
+        <span class="qr-tab-num">2</span>
+        <span>Full Script</span>
+        <span class="qr-tab-meta">Verbatim end-to-end</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============ LAYOUT: main + sticky sidebar ============ -->
+  <div class="qr-layout">
+
+    <!-- ============ MAIN COLUMN (tabbed: Quick Reference + Full Script) ============ -->
+    <main class="qr-main">
+
+      <!-- ============ TAB PANEL 1: QUICK REFERENCE ============ -->
+      <section id="tab-panel-quick" class="qr-tab-panel is-active" role="tabpanel" aria-labelledby="tab-btn-quick">
+
+      <!-- TOC strip -->
+      <nav class="qr-toc" aria-label="Sections">
+        <div class="qr-toc-label">Jump to call stage</div>
+        <div class="qr-toc-list">
+          <a href="#s0" class="qr-toc-link"><span class="qr-toc-num">0.</span>Lexicon</a>
+          <a href="#s1" class="qr-toc-link"><span class="qr-toc-num">1.</span>Fit Filters</a>
+          <a href="#s1b" class="qr-toc-link"><span class="qr-toc-num">1b.</span>Profile Decoder</a>
+          <a href="#s2" class="qr-toc-link"><span class="qr-toc-num">2.</span>Discovery Qs</a>
+          <a href="#s3" class="qr-toc-link"><span class="qr-toc-num">3.</span>Preference Q</a>
+          <a href="#s4" class="qr-toc-link"><span class="qr-toc-num">4.</span>Tier Match</a>
+          <a href="#s5" class="qr-toc-link"><span class="qr-toc-num">5.</span>Rx Reframe</a>
+          <a href="#s6" class="qr-toc-link"><span class="qr-toc-num">6.</span>$1.50/day</a>
+          <a href="#s7" class="qr-toc-link"><span class="qr-toc-num">7.</span>Mid-call DQ</a>
+          <a href="#s7b" class="qr-toc-link"><span class="qr-toc-num">7b.</span>Pre-emptive</a>
+          <a href="#s8" class="qr-toc-link"><span class="qr-toc-num">8.</span>Q1-Q4 Close</a>
+          <a href="#s9" class="qr-toc-link"><span class="qr-toc-num">9.</span>Application</a>
+          <a href="#s10" class="qr-toc-link"><span class="qr-toc-num">10.</span>Post-sale</a>
+          <a href="#s11" class="qr-toc-link"><span class="qr-toc-num">11.</span>Customer FAQ</a>
+        </div>
+      </nav>
+
+      <!-- ============ 0. LEXICON · UNL terms in plain English ============ -->
+      <article id="s0" class="qr-step-card is-lexicon">
+        <div class="qr-step-head">
+          <span class="qr-step-num" aria-hidden="true">0</span>
+          <h2 class="qr-step-title">Lexicon — UNL terms in plain English <span class="qr-step-title-time">read once · 60 sec</span></h2>
+          <span class="qr-stage stage-lexicon">Lexicon</span>
+        </div>
+        <div class="qr-lexicon-intro">
+          New to ancillary? Read this once. These are the only UNL-specific terms used in the rest of this reference — everything else is plain MA-agent English.
+        </div>
+        <div class="qr-lexicon-grid">
+          <div class="qr-lex-term">HI · Hospital Indemnity<br><span style="font-weight:500;font-size:0.78rem;color:#4B7797;">(HI Shield)</span></div>
+          <div class="qr-lex-def">UNL's hospital cash product. Pays you cash directly when you're admitted. <strong>Not health insurance</strong> — supplemental indemnity.</div>
+
+          <div class="qr-lex-term">HHC · Home Healthcare<br><span style="font-weight:500;font-size:0.78rem;color:#4B7797;">(HHC Shield)</span></div>
+          <div class="qr-lex-def">UNL's home care product. Pays cash when you can't perform <strong>2 of 6 daily-living activities</strong>. Includes prescription reimbursement. <strong>Not health insurance.</strong></div>
+
+          <div class="qr-lex-term">HHC Plan A / B / C</div>
+          <div class="qr-lex-def">The three HHC tiers — match to the customer's monthly Rx count. <strong>Plan A</strong> = light (1-2 meds), <strong>Plan B</strong> = typical fit (3-5 meds), <strong>Plan C</strong> = heavy (6+ meds).</div>
+
+          <div class="qr-lex-term">TCare</div>
+          <div class="qr-lex-def">The <strong>$3,500 caregiver benefit</strong> included in HHC Plan B and C. Pays the family member who provides care, not the customer.</div>
+
+          <div class="qr-lex-term">Rx reimbursement</div>
+          <div class="qr-lex-def">A built-in feature of HHC. Customer emails receipts to <code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;background:white;padding:0.05rem 0.3rem;border-radius:3px;border:1px solid rgba(45,90,122,0.18);">claims@unlinsurance.com</code>; UNL mails them a check ($10/generic, $25/brand). Up to <strong>$50/month</strong> for Plan B.</div>
+
+          <div class="qr-lex-term">NEPQ</div>
+          <div class="qr-lex-def">Neuro-Emotional Persuasion Questioning — the discovery-question method we use. Translation: <strong>ask the customer questions</strong> instead of pitching at them.</div>
+
+          <div class="qr-lex-term">ADL</div>
+          <div class="qr-lex-def">Activity of Daily Living — bathing, dressing, toileting, transferring, eating, continence. HHC triggers when the customer can't perform <strong>2 of these 6</strong>.</div>
+
+          <div class="qr-lex-term">SOA</div>
+          <div class="qr-lex-def">Scope of Appointment — the verbal authorization at the start of every CPC MA call. <strong>Your existing SOA already covers HI + HHC.</strong></div>
+
+          <div class="qr-lex-term">DQ · Mid-call DQ</div>
+          <div class="qr-lex-def">Disqualification — when a health knockout fires (cancer, insulin diabetes, etc.) and the customer can't qualify for one of the products. <strong>Handle gracefully; pivot if possible.</strong></div>
+
+          <div class="qr-lex-term">Q1 / Q2 / Q3 / Q4</div>
+          <div class="qr-lex-def">The four close-sequence questions in order. <strong>Q1:</strong> "Do you feel like this could be the answer for you?" <strong>Q2:</strong> "Why do you feel like it is, though?" <strong>Q3:</strong> "What parts will help you most?" <strong>Q4:</strong> "Do you feel like this is something you can have?"</div>
+        </div>
+      </article>
+
+      <!-- ============ 1. OPEN · FIT FILTERS ============ -->
+      <article id="s1" class="qr-step-card">
+        <div class="qr-step-head">
+          <span class="qr-step-num">1</span>
+          <h2 class="qr-step-title">CPC Fit Filters — run FIRST <span class="qr-step-title-time">30 sec</span></h2>
+          <span class="qr-stage stage-open">Open</span>
+        </div>
+        <div class="qr-prose">
+          <p>Two questions, asked early. They tell you whether <strong>HI (Hospital Indemnity)</strong> is even on the table and whether to walk away entirely.</p>
+        </div>
+        <div class="qr-filter">
+          <div class="qr-filter-head">
+            <span class="qr-filter-name">Medicaid filter</span>
+            <span class="qr-filter-action is-dq">DQ entirely</span>
+          </div>
+          <div class="qr-filter-q"><em>"Are you on Medicaid at all, or just Medicare?"</em></div>
+          <div class="qr-filter-result"><strong>If yes:</strong> stop. High churn risk and benefits can affect Medicaid eligibility. Bad for them, bad for us.</div>
+        </div>
+        <div class="qr-filter">
+          <div class="qr-filter-head">
+            <span class="qr-filter-name">Medigap filter</span>
+            <span class="qr-filter-action is-skip">Skip HI only</span>
+          </div>
+          <div class="qr-filter-q"><em>"Do you have Medicare Supplement, Medicare Advantage, or just Original Medicare?"</em></div>
+          <div class="qr-filter-result"><strong>If Medigap:</strong> skip HI (their Supplement covers hospital well). <strong>HHC (Home Healthcare)</strong> + Rx reimbursement still fits cleanly.</div>
+        </div>
+      </article>
+
+      <!-- ============ 1b. READ · CUSTOMER PROFILE DECODER ============ -->
+      <article id="s1b" class="qr-step-card">
+        <div class="qr-step-head">
+          <span class="qr-step-num">1</span>
+          <h2 class="qr-step-title">Customer Profile Decoder <span class="qr-step-title-time">60 sec recognition</span></h2>
+          <span class="qr-stage stage-read">Read</span>
+        </div>
+        <div class="qr-prose">
+          <p>Listen for these cues in the first minute. Adjust your emphasis accordingly.</p>
+        </div>
+
+        <div class="qr-decoder">
+          <div class="qr-decoder-row">
+            <div>
+              <span class="qr-decoder-cell-label">Cue</span>
+              <div class="qr-decoder-cue"><em>4 meds + mentions diabetes</em></div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Profile</span>
+              <div class="qr-decoder-profile">4-Med Diabetic</div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Tactic</span>
+              <div class="qr-decoder-tactic">Lean on Rx reframe; <strong>HHC Plan B fits</strong>; screen carefully for insulin (HI knockout)</div>
+            </div>
+          </div>
+
+          <div class="qr-decoder-row">
+            <div>
+              <span class="qr-decoder-cell-label">Cue</span>
+              <div class="qr-decoder-cue"><em>"My husband passed" / grief tone</em></div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Profile</span>
+              <div class="qr-decoder-profile">Recent Widow</div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Tactic</span>
+              <div class="qr-decoder-tactic">Slower pace; loop emotional content; <strong>TCare ($3,500 caregiver benefit) lands hard</strong>; emotional curveballs likely</div>
+            </div>
+          </div>
+
+          <div class="qr-decoder-row">
+            <div>
+              <span class="qr-decoder-cell-label">Cue</span>
+              <div class="qr-decoder-cue"><em>"We're healthy" + spouse on call</em></div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Profile</span>
+              <div class="qr-decoder-profile">Active Couple</div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Tactic</span>
+              <div class="qr-decoder-tactic">Lock in while healthy; <strong>70%-lifetime-need framing</strong>; try to get spouse to engage</div>
+            </div>
+          </div>
+
+          <div class="qr-decoder-row">
+            <div>
+              <span class="qr-decoder-cell-label">Cue</span>
+              <div class="qr-decoder-cue"><em>Mentions caring for sick spouse</em></div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Profile</span>
+              <div class="qr-decoder-profile">Spouse-Caregiver</div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Tactic</span>
+              <div class="qr-decoder-tactic">They get HHC viscerally; <strong>TCare (caregiver benefit) resonates</strong>; ask about their own health</div>
+            </div>
+          </div>
+
+          <div class="qr-decoder-row">
+            <div>
+              <span class="qr-decoder-cell-label">Cue</span>
+              <div class="qr-decoder-cue"><em>Cancer/cardiac/serious-illness history</em></div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Profile</span>
+              <div class="qr-decoder-profile">Cancer Survivor</div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Tactic</span>
+              <div class="qr-decoder-tactic">Mid-call DQ likely on HI (24-month look-back); <strong>keep HHC alive</strong></div>
+            </div>
+          </div>
+
+          <div class="qr-decoder-row">
+            <div>
+              <span class="qr-decoder-cell-label">Cue</span>
+              <div class="qr-decoder-cue"><em>80+ + kids out of state</em></div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Profile</span>
+              <div class="qr-decoder-profile">Late-80s Isolated</div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Tactic</span>
+              <div class="qr-decoder-tactic"><strong>HHC is centerpiece</strong> (no family safety net); slower pace; HI rate stepped down at 80</div>
+            </div>
+          </div>
+
+          <div class="qr-decoder-row">
+            <div>
+              <span class="qr-decoder-cell-label">Cue</span>
+              <div class="qr-decoder-cue"><em>"I have a Supplement" / "Medigap"</em></div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Profile</span>
+              <div class="qr-decoder-profile">Medigap Holder</div>
+            </div>
+            <div>
+              <span class="qr-decoder-cell-label">Tactic</span>
+              <div class="qr-decoder-tactic">Concede HI upfront (their Supp covers hospital); <strong>pivot to HHC + Rx</strong></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 2. DISCOVER · 3 NEPQ SEEDS ============ -->
+      <article id="s2" class="qr-step-card">
+        <div class="qr-step-head">
+          <span class="qr-step-num">2</span>
+          <h2 class="qr-step-title">The 4 Discovery Questions <span class="qr-step-title-time">(NEPQ — problem awareness)</span></h2>
+          <span class="qr-stage stage-discover">Discover</span>
+        </div>
+        <div class="qr-prose">
+          <p>Four open-ended <strong>discovery questions (NEPQ-style)</strong> that surface real exposures BEFORE you pitch a product. Drop them inside NEADS — woven into the natural rhythm of MA discovery, not stacked at the end.</p>
+        </div>
+
+        <div class="qr-seed">
+          <span class="qr-seed-label">HI seed</span>
+          <div class="qr-seed-q">"If you were admitted to the hospital next month, do you know what your plan's copay would be per day? On most MA plans it's $200-400/day. A 4-day stay = $1,200-1,800 out of pocket. How would that feel if it hit your account next month?"</div>
+        </div>
+
+        <div class="qr-seed">
+          <span class="qr-seed-label">HHC seed</span>
+          <div class="qr-seed-q">"Different question — have you ever needed help around the house — bathing, dressing, getting around — even temporarily after an illness or surgery? Did you know Medicare doesn't actually cover that kind of daily-living help?"</div>
+        </div>
+
+        <div class="qr-seed">
+          <span class="qr-seed-label">Family-burden seed</span>
+          <div class="qr-seed-q">"If you needed help like that for a few months — say after a fall or stroke — who in your life would be doing that for you?"</div>
+        </div>
+
+        <div class="qr-seed">
+          <span class="qr-seed-label">Past-experience seed</span>
+          <div class="qr-seed-q">"Has anyone close to you — a parent, sibling, friend — been hospitalized or needed help at home in the last couple years? Do you know what they ended up paying out of pocket?"</div>
+        </div>
+
+        <div class="qr-tip"><strong>Loop their answers:</strong> <em>"Say more about that?"</em> The second articulation is always more emotional than the first.</div>
+
+        <div class="qr-tip" style="border-left: 3px solid #3DCEB2; padding-left: 0.75rem; margin-top: 0.5rem;"><strong>★ The Implication follow-up</strong> (use after any seed that lands with concern): <em>"If something like that happened to you and you didn't have a way to cover it — how do you think it would play out?"</em> Forces them to mentally simulate the consequence. NEPQ-master move; prospects who simulate the bad outcome convert at 3-5x the rate of those who only acknowledge the abstract risk.</div>
+      </article>
+
+      <!-- ============ 3. DISCOVER · PREFERENCE QUESTION ============ -->
+      <article id="s3" class="qr-step-card">
+        <div class="qr-step-head">
+          <span class="qr-step-num">3</span>
+          <h2 class="qr-step-title">The Preference Question</h2>
+          <span class="qr-stage stage-discover">Discover</span>
+        </div>
+        <div class="qr-prose">
+          <p>The single highest-leverage discovery move on the entire call. Drill this. Ask it <strong>between the HI (Hospital Indemnity) and HHC (Home Healthcare) presentations</strong> — their answer becomes the anchor for everything that follows.</p>
+        </div>
+
+        <div class="qr-preference-q">
+          <div class="qr-preference-q-eyebrow">Verbatim</div>
+          <div class="qr-preference-q-body">"If you had an accident or a surgery and later had to choose between recovering in a nursing facility or recovering at home with someone coming over to help you bathe, dress, and get around — which would you want?"</div>
+          <span class="qr-preference-q-tag">~95% say "home"</span>
+        </div>
+
+        <div class="qr-tip"><strong>Why the specific activities:</strong> "Someone coming over to help you bathe, dress, and get around" makes them picture a real person doing real things — not abstract "care." And those three activities ARE the actual HHC trigger ADLs — clever foreshadowing for the product you'll present next.</div>
+
+        <div class="qr-tip" style="border-left: 3px solid #3DCEB2; padding-left: 0.75rem; margin-top: 0.5rem;"><strong>★ After they say "home" (95% will) — LOOP:</strong> <em>"Say more about that — what is it about home that matters to you?"</em> Then <strong>stay silent</strong>. Whatever they say is THEIR reason. In the close, anchor back: <em>"You said home matters to you because [their words] — that's exactly what this is designed to protect."</em> One loop turns a binary answer into a value-anchor that makes the close inevitable.</div>
+      </article>
+
+      <!-- ============ 4. TIER · TIER MATCH + HI SPECS ============ -->
+      <article id="s4" class="qr-step-card">
+        <div class="qr-step-head">
+          <span class="qr-step-num">4</span>
+          <h2 class="qr-step-title">HHC (Home Healthcare) Tier Match + HI (Hospital Indemnity) Quick Specs</h2>
+          <span class="qr-stage stage-tier">Tier</span>
+        </div>
+        <div class="qr-prose">
+          <p>Match HHC tier to monthly Rx load. Then check HI knockouts — these screened during NEADS, not in front of the customer.</p>
+        </div>
+
+        <div class="qr-toc-label" style="margin-top:0.5rem;">HHC tier match</div>
+        <div class="qr-table-wrap">
+          <table class="qr-table is-tight">
+            <thead>
+              <tr>
+                <th>Customer profile</th>
+                <th>HHC plan</th>
+                <th>AP (annual premium)</th>
+                <th>Rx cap</th>
+                <th>Y1 (agent)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1-2 meds, generic</td><td><strong>HHC Plan A</strong></td><td>~$365</td><td>$300</td><td>$91</td></tr>
+              <tr><td>3-5 meds, mixed <span class="qr-mini qr-mini-accent">default</span></td><td><strong>HHC Plan B</strong></td><td>~$640</td><td>$600</td><td><strong>$160</strong></td></tr>
+              <tr><td>6+ meds, brand</td><td><strong>HHC Plan C</strong></td><td>~$941</td><td>$900</td><td>$235</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="qr-tip"><strong>State gotchas:</strong> KY has no Rx rider. CO / DE / SD pay adjusted (lower) commission. 60-day Rx waiting period on every HHC policy.</div>
+
+        <div class="qr-trigger">
+          <em>HHC trigger:</em> A licensed practitioner certifies the customer has cognitive impairment OR is unable to perform <strong>2 of 6 ADLs (Activities of Daily Living)</strong> — bathing · dressing · toileting · transferring · eating · continence. No prior hospitalization required.
+        </div>
+
+        <div class="qr-toc-label" style="margin-top:1rem;">HI Shield quick specs</div>
+        <ul class="qr-prose">
+          <li>Daily benefit $100-900/day × 3-10 days/yr (customer picks)</li>
+          <li>No Rx reimbursement on HI — that's HHC's mechanism</li>
+          <li>Not available in <strong>MT, NM</strong>. Rate steps down at age 80.</li>
+        </ul>
+
+        <div class="qr-toc-label" style="margin-top:0.6rem;">HI knockouts — health conditions that disqualify (screen during NEADS)</div>
+        <div class="qr-ko-chips">
+          <span class="qr-ko-chip">Insulin diabetes</span>
+          <span class="qr-ko-chip">Recent cancer</span>
+          <span class="qr-ko-chip">Advanced COPD</span>
+          <span class="qr-ko-chip">Recent cardiac</span>
+          <span class="qr-ko-chip">GI / liver / transplant</span>
+          <span class="qr-ko-chip">Neurological</span>
+          <span class="qr-ko-chip">Substance abuse</span>
+          <span class="qr-ko-chip">ADL needs</span>
+          <span class="qr-ko-chip">HIV</span>
+        </div>
+      </article>
+
+      <!-- ============ 5. PITCH · ★ Rx-Net-Cost Reframe (CENTERPIECE) ============ -->
+      <article id="s5" class="qr-step-card is-centerpiece">
+        <div class="qr-step-head">
+          <span class="qr-step-num">5</span>
+          <h2 class="qr-step-title"><span class="qr-centerpiece-mark">★</span>The Rx-Net-Cost Reframe</h2>
+          <span class="qr-stage stage-pitch">Pitch</span>
+        </div>
+        <div class="qr-prose">
+          <p><strong>The single most important pitch on the call.</strong> Drill it to muscle memory. Gross premium first, then the math that actually matters.</p>
+        </div>
+
+        <div class="qr-verbatim is-pitch">
+          <strong>Pre-frame:</strong> "Bear with me — I'll give you the gross premium first, then the math that actually matters."
+        </div>
+
+        <div class="qr-verbatim is-pitch">
+          "You're already filling prescriptions. HHC Shield reimburses $10 for every generic, $25 for brand names. You email receipts to UNL; they mail you a check. If you fill 4/month, you typically receive $40-50/month in checks. <em>[pause]</em>
+          <br><br>
+          The HHC premium is $53/month — drafts from your account automatically. The reimbursement comes back separately by check after you submit receipts. So $53 out, about $50 back. Net spending around $3-5/month on HHC. <em>[pause]</em>
+          <br><br>
+          Hospital Indemnity is a separate supplemental product alongside — about $40/month, no Rx offset, but pays $1,200+ in cash on a typical 4-day admission.
+          <br><br>
+          Two separate supplemental products. Combined premium ~$93/month, Rx reimbursement ~$50/month back. Net spending ~$43/month across both — about $1.50/day for hospital cash + home healthcare + $3,500 caregiver benefit. Does that make sense?"
+        </div>
+
+        <div class="qr-tip"><strong>Critical:</strong> always say "premium drafts $53" AND "reimbursement comes back separately." Never collapse the two numbers into a single "net" figure — that's a compliance violation. See the <strong>Never Say</strong> rail.</div>
+      </article>
+
+      <!-- ============ 6. PITCH · COMBINED MATH ============ -->
+      <article id="s6" class="qr-step-card">
+        <div class="qr-step-head">
+          <span class="qr-step-num">6</span>
+          <h2 class="qr-step-title">Combined Math — $1.50/day framing</h2>
+          <span class="qr-stage stage-pitch">Pitch</span>
+        </div>
+        <div class="qr-prose">
+          <p>The number to leave on the table after the Reframe lands. Show it; let it breathe.</p>
+        </div>
+
+        <div class="qr-math">
+          <div class="qr-math-row"><span class="qr-math-label">HHC premium</span><span class="qr-math-value">~$53/mo</span></div>
+          <div class="qr-math-row"><span class="qr-math-label">HI premium</span><span class="qr-math-value">~$40/mo</span></div>
+          <div class="qr-math-row"><span class="qr-math-label"><strong>Combined premium drafted</strong></span><span class="qr-math-value">~$93/mo</span></div>
+          <div class="qr-math-row is-credit"><span class="qr-math-label">HHC Rx reimbursement back (mailed checks)</span><span class="qr-math-value">−$40-50/mo</span></div>
+          <div class="qr-math-row is-total"><span class="qr-math-label">Net spending across both</span><span class="qr-math-value">~$43/mo · $1.50/day</span></div>
+        </div>
+
+        <div class="qr-payoff">
+          <span class="qr-payoff-label">What the customer gets</span>
+          ~$1,200-2,000 hospital cash on a typical admission · <strong>$100K HHC coverage</strong> · $3,500 caregiver lump · ongoing Rx reimbursement
+        </div>
+      </article>
+
+      <!-- ============ 7. DQ · MID-CALL DQ ============ -->
+      <article id="s7" class="qr-step-card is-dq">
+        <div class="qr-step-head">
+          <span class="qr-step-num">7</span>
+          <h2 class="qr-step-title">Mid-Call DQ (Disqualification) — when an HI knockout fires</h2>
+          <span class="qr-stage stage-dq">DQ</span>
+        </div>
+        <div class="qr-prose">
+          <p>A health knockout surfaces mid-call and the customer no longer qualifies for one of the products. You break it gracefully. <strong>HI (Hospital Indemnity) off the table — HHC (Home Healthcare) stays on.</strong></p>
+        </div>
+
+        <div class="qr-verbatim is-warn">
+          "I want to be straight with you. Based on what you just shared, the hospital indemnity piece isn't going to be a fit. The 24-month look-back catches it. Let me keep going with home healthcare — different underwriting, and we can revisit HI in [Y] months."
+        </div>
+
+        <div class="qr-tip"><strong>DQ fast.</strong> HHC stays on. Don't lose the call over HI.</div>
+      </article>
+
+      <!-- ============ 7b. PREEMPT · PRE-EMPTIVE REFRAMES ============ -->
+      <article id="s7b" class="qr-step-card">
+        <div class="qr-step-head">
+          <span class="qr-step-num">7</span>
+          <h2 class="qr-step-title">Pre-emptive Reframes — handle BEFORE the objection surfaces</h2>
+          <span class="qr-stage stage-preempt">Preempt</span>
+        </div>
+        <div class="qr-prose">
+          <p>When you hear the cue early, drop the reframe before they object. Defuses the resistance before it forms.</p>
+        </div>
+
+        <div class="qr-reframe">
+          <div class="qr-reframe-row">
+            <span class="qr-reframe-cue">Medigap holder</span>
+            <div class="qr-reframe-body">"Your Medigap is great for what it does — pays the deductibles and coinsurance Medicare leaves on hospital care. You don't need Hospital Indemnity on top of that. But Medigap can't add new benefit categories, so the home care gap is still there. Let me show you Home Healthcare on its own."</div>
+          </div>
+
+          <div class="qr-reframe-row">
+            <span class="qr-reframe-cue">"MA already has supplemental benefits"</span>
+            <div class="qr-reframe-body">"Some MA plans do have a small in-home support benefit — usually capped at a small dollar amount, limited to certain chronic conditions, only about 7% of MA plans have a meaningful version of this. Want me to walk through your Summary of Benefits and confirm what your plan actually offers? Then we can see if this complements it or duplicates it."</div>
+          </div>
+
+          <div class="qr-reframe-row">
+            <span class="qr-reframe-cue">"I'm in good shape"</span>
+            <div class="qr-reframe-body">"That's exactly why this is the right time to look at it — about 70% of seniors who reach 65 will need help at home at some point. Underwriting tightens dramatically once a health change happens. The window to lock this in at a clean rate is when you're healthy."</div>
+          </div>
+
+          <div class="qr-reframe-row">
+            <span class="qr-reframe-cue">"Medicare covers 100 days of home care"</span>
+            <div class="qr-reframe-body">"That's actually the Skilled Nursing Facility rule — for nursing home stays after a hospital admission. Medicare home health has no time limit, but it only covers SKILLED care — nursing visits, physical therapy. It doesn't cover daily-living help like bathing or dressing, which is what Home Healthcare pays for."</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 8. CLOSE · ★ Q1-Q4 (CENTERPIECE) ============ -->
+      <article id="s8" class="qr-step-card is-centerpiece">
+        <div class="qr-step-head">
+          <span class="qr-step-num">8</span>
+          <h2 class="qr-step-title"><span class="qr-centerpiece-mark">★</span>Q1-Q4 Close Sequence</h2>
+          <span class="qr-stage stage-close">Close</span>
+        </div>
+        <div class="qr-prose">
+          <p>Pre-checks (mental, run them before Q1):</p>
+        </div>
+        <div class="qr-precheck">
+          <span class="qr-precheck-chip">Math heard</span>
+          <span class="qr-precheck-chip">Knockouts clean</span>
+          <span class="qr-precheck-chip">They asked a specific Q</span>
+          <span class="qr-precheck-chip">Tone leaning in</span>
+        </div>
+
+        <div class="qr-q-list">
+          <div class="qr-q-item">
+            <span class="qr-q-tag">Q1</span>
+            <div class="qr-q-text">"Do you feel like this could be the answer for you?"<span class="qr-q-note">STOP TALKING. Wait.</span></div>
+          </div>
+          <div class="qr-q-item">
+            <span class="qr-q-tag">Q2</span>
+            <div class="qr-q-text">"Hold on — why do you feel like it is, though?"<span class="qr-q-note">Silent. They sell themselves.</span></div>
+          </div>
+          <div class="qr-q-item">
+            <span class="qr-q-tag">Q3</span>
+            <div class="qr-q-text">"What specific parts of what we went over today do you feel are going to help you the most?"</div>
+          </div>
+          <div class="qr-q-item">
+            <span class="qr-q-tag">Q4</span>
+            <div class="qr-q-text">"Do you feel like this is something you can have that'll get you where you want to go?"</div>
+          </div>
+          <div class="qr-q-item">
+            <span class="qr-q-tag is-apply">App</span>
+            <div class="qr-q-text">"Really, the next step is just confirming the application — takes about 10 minutes. Sound fair?"</div>
+          </div>
+        </div>
+
+        <div class="qr-kill">
+          <span class="qr-kill-label">What kills Q2</span>
+          Adding <strong>your</strong> reasons after they answer. Say only <em>"That's exactly right."</em> Never <em>"Right, and also it covers X, Y, Z."</em> Their reason is what they remember in month 4.
+        </div>
+      </article>
+
+      <!-- ============ 9. APPLY · APPLICATION + SIGNATURE ============ -->
+      <article id="s9" class="qr-step-card">
+        <div class="qr-step-head">
+          <span class="qr-step-num">9</span>
+          <h2 class="qr-step-title">Application + Signature</h2>
+          <span class="qr-stage stage-apply">Apply</span>
+        </div>
+        <div class="qr-prose">
+          <p><strong>You run the whole application.</strong> No handoff. About 10 minutes. Then signature.</p>
+        </div>
+
+        <div class="qr-verbatim">
+          <strong>Application transition:</strong> "Great. I'm going to walk you through the application right here on the line — takes about 10 minutes. I'll ask the questions, you give the answers, then we'll do the signature."
+        </div>
+
+        <div class="qr-verbatim is-pitch">
+          <strong>Signature default — text confirmation code:</strong> "For the signature, UNL will text a confirmation code. It can go to your phone or anyone's phone who's with you. You'll read me the code and we're done. Whose phone should I send it to?"
+        </div>
+
+        <div class="qr-verbatim">
+          <strong>Signature fallback — 3-way call with UNL:</strong> "No problem — we'll do this another way. I'll bring UNL on the line and they'll confirm the signature with you verbally. Hold on one moment."
+        </div>
+
+        <div class="qr-tip"><strong>Never submit without one of the two confirmation methods.</strong></div>
+
+        <div class="qr-toc-label" style="margin-top:1rem;">Referral ask — between Q2 and the application</div>
+        <div class="qr-verbatim is-pitch">
+          "While I have you — do you have a friend or family member who might benefit from coverage like this? No pressure, just thinking of who else this would be a fit for."
+        </div>
+        <div class="qr-prose">
+          <p><strong>If yes:</strong> the customer carries the introduction — the referral must call us inbound. (Never outbound-call referrals — TCPA $500-1,500/call.)</p>
+        </div>
+        <div class="qr-verbatim">
+          "That's great. Here's how we have to handle it — they'd need to call us directly. I'll give you my number to pass along."
+        </div>
+      </article>
+
+      <!-- ============ 10. POST · POST-SALE 60 SECONDS ============ -->
+      <article id="s10" class="qr-step-card">
+        <div class="qr-step-head">
+          <span class="qr-step-num">10</span>
+          <h2 class="qr-step-title">Post-Sale 60 Seconds + Rx Setup</h2>
+          <span class="qr-stage stage-post">Post</span>
+        </div>
+        <div class="qr-prose">
+          <p>Right after submission, <strong>before</strong> you end the call. Surprised welcome calls are the #1 cause of 30-day cancellations.</p>
+        </div>
+
+        <div class="qr-checklist">
+          <div class="qr-check">
+            <span class="qr-check-num">1</span>
+            <div>
+              <div class="qr-check-label">Delivery</div>
+              <div class="qr-check-q">"Policy by mail/email in [timeframe]. From UNL Insurance."</div>
+            </div>
+          </div>
+          <div class="qr-check">
+            <span class="qr-check-num">2</span>
+            <div>
+              <div class="qr-check-label">First premium</div>
+              <div class="qr-check-q">"First payment on [date], same day each month after."</div>
+            </div>
+          </div>
+          <div class="qr-check">
+            <span class="qr-check-num">3</span>
+            <div>
+              <div class="qr-check-label">Claims</div>
+              <div class="qr-check-q">"Number's on the policy. Or call me — I'll walk you through it."</div>
+            </div>
+          </div>
+          <div class="qr-check is-hot">
+            <span class="qr-check-num">4</span>
+            <div>
+              <div class="qr-check-label"><span class="qr-star">★</span>Welcome call (most important)</div>
+              <div class="qr-check-q">"Within [X] days you'll get a quick call from UNL confirming you're satisfied. Just say yes — they're checking I represented it right."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qr-rx-block">
+          <span class="qr-rx-label">Rx submission — give to customer</span>
+          <div class="qr-rx-row">
+            <span><strong>Email receipts to:</strong> <code>claims@unlinsurance.com</code></span>
+          </div>
+          <div class="qr-rx-row" style="margin-top:0.5rem;">
+            <span><strong>Include:</strong> pharmacy name · drug names · insured name · date · RX code</span>
+          </div>
+          <div class="qr-rx-row" style="margin-top:0.5rem;">
+            <span><strong>UNL Agent Service:</strong> <code>800-635-1993</code></span>
+            <span><strong>Check by mail:</strong> 2-3 weeks</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 11. FAQ · CUSTOMER QUESTIONS ============ -->
+      <article id="s11" class="qr-step-card">
+        <div class="qr-step-head">
+          <span class="qr-step-num">11</span>
+          <h2 class="qr-step-title">Customer Questions — what they'll ask</h2>
+          <span class="qr-stage stage-faq">FAQ</span>
+        </div>
+        <div class="qr-prose">
+          <p>These aren't objections to overcome — they're questions to answer cleanly.</p>
+        </div>
+
+        <div class="qr-faq-list">
+          <div class="qr-faq-row">
+            <div class="qr-faq-q">"What if I don't fill prescriptions?"</div>
+            <div class="qr-faq-a">"Then the Rx reimbursement doesn't apply — you'd just have the home healthcare and hospital coverage. Most agents don't recommend HHC unless you're filling prescriptions, because the math works best with the reimbursement."</div>
+          </div>
+
+          <div class="qr-faq-row">
+            <div class="qr-faq-q">"How long until the reimbursement check comes?"</div>
+            <div class="qr-faq-a">"Typically 2-3 weeks after you email your receipt to UNL. Some go faster."</div>
+          </div>
+
+          <div class="qr-faq-row">
+            <div class="qr-faq-q">"Can my spouse get this too?"</div>
+            <div class="qr-faq-a">"Yes — separate application, separate underwriting. Up to 2 insureds on the same application; each gets their own individual policy."</div>
+          </div>
+
+          <div class="qr-faq-row">
+            <div class="qr-faq-q">"What if I cancel?"</div>
+            <div class="qr-faq-a">"You can cancel anytime by contacting UNL. Premiums paid are generally not refundable after the first month — but you're not locked in."</div>
+          </div>
+
+          <div class="qr-faq-row">
+            <div class="qr-faq-q">"What if I move out of state?"</div>
+            <div class="qr-faq-a">"Coverage follows you. The state rate may adjust at renewal, but the policy stays active."</div>
+          </div>
+
+          <div class="qr-faq-row">
+            <div class="qr-faq-q">"How do I file a claim?"</div>
+            <div class="qr-faq-a">"Hospital Indemnity: call UNL within 30 days of discharge, give them the admission dates and hospital name, they mail you a check. Home Healthcare: when you can't perform 2 of 6 daily activities (bathing, dressing, etc.) or have certified cognitive impairment, your doctor certifies it and UNL pays monthly. We covered this earlier."</div>
+          </div>
+
+          <div class="qr-faq-row">
+            <div class="qr-faq-q">"Does this affect my Medicare or my SSI?"</div>
+            <div class="qr-faq-a">"No on Medicare — your MA stays exactly the same. No on Social Security retirement income either. (If you're on Medicaid or SSI specifically, the cash benefits could affect eligibility — we'd need to check that separately.)"</div>
+          </div>
+
+          <div class="qr-faq-row">
+            <div class="qr-faq-q">"Is this through Medicare?"</div>
+            <div class="qr-faq-a">"No — this is a separate supplemental indemnity policy through UNL Insurance, not part of your Medicare. It works alongside your Medicare; it doesn't change your Medicare at all."</div>
+          </div>
+        </div>
+      </article>
+
+      </section>
+      <!-- ============ END TAB PANEL 1 ============ -->
+
+      <!-- ============ TAB PANEL 2: FULL SCRIPT ============ -->
+      <section id="tab-panel-script" class="qr-tab-panel" role="tabpanel" aria-labelledby="tab-btn-script" hidden>
+
+        <!-- Intro -->
+        <div class="qr-script-intro">
+          <div class="qr-script-intro-eyebrow">The full script · End-to-end</div>
+          <div class="qr-script-intro-title">The verbatim integrated CPC MA + Ancillary call</div>
+          <div class="qr-script-intro-body">
+            <p style="margin-bottom: 0.7rem;">This is the verbatim end-to-end call flow — both <strong>Scenario 3</strong> (MA closes → harvest ancillary) and <strong>Scenario 4</strong> (MA fails → pivot to ancillary). Designed to read along during early cross-sell calls until muscle memory builds.</p>
+            <p style="margin-bottom: 0;">The standard MA portions of Phase 1 are compressed (reference the full MA script); the cross-sell additions are shown in detail. <strong>Phase 6 (Harvest)</strong> and <strong>Phase 6 alt (Pivot)</strong> are the centerpiece moves — drill those first.</p>
+          </div>
+        </div>
+
+        <!-- Reference: TPMO + SOA -->
+        <div class="qr-reference-card">
+          <div class="qr-reference-eyebrow">Compliance reference · Verbatim</div>
+          <h3 class="qr-reference-title">TPMO Disclaimer + Verbal SOA (Scope of Appointment)</h3>
+
+          <span class="qr-reference-label">TPMO (Third-Party Marketing Organization) Disclaimer — within first 60 seconds</span>
+          <div class="qr-verbatim is-warn">
+            "You do not have to provide any health information, unless it's used to determine your eligibility to enroll. We do not offer every plan available in your area. Any information we provide is limited to those plans we do offer in your area. Please contact Medicare.gov or 1-800-MEDICARE to get information on all of your options."
+          </div>
+
+          <span class="qr-reference-label">Verbal SOA — your authority for HI (Hospital Indemnity) + HHC (Home Healthcare)</span>
+          <div class="qr-verbatim">
+            "Clear Path Coverage is contracted by multiple Medicare plan providers and does not work directly for the Federal government. Plans are insured or covered by a Medicare Advantage organization with a Medicare contract and/or a Medicare-approved Part D sponsor. Enrollment in the plan depends on the plan's contract renewal with Medicare. By talking with me, you are under no obligation to enroll, your current or future Medicare enrollment status will not be impacted, and you will not automatically be enrolled in a plan. <strong>I do need your permission, to discuss your Medicare Advantage, Hospital Indemnity, Home Healthcare, and prescription drug plan benefits.</strong> Do I have your permission to continue?"
+          </div>
+
+          <div class="qr-tip" style="margin-top: 0.85rem;"><strong>The SOA (Scope of Appointment) already authorizes HI + HHC.</strong> Cross-sell isn't a new motion — it's the script doing what it was designed to do. No further compliance step needed for the cross-sell.</div>
+        </div>
+
+        <!-- Phase 1 -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">1</span>
+            <h2 class="qr-phase-title">Standard MA opening <span class="qr-phase-eyebrow">(unchanged)</span></h2>
+            <span class="qr-stage stage-phase">Phase 1</span>
+          </div>
+          <div class="qr-phase-sub">Intro through Doctor Verification</div>
+          <div class="qr-phase-body">
+            <p>Intro → Privacy Statement → Value Statement → Carrier confirmation → <strong>TPMO Disclaimer (verbatim, within first 60 seconds)</strong> → Identify Customer &amp; Authorization → <strong>Verbal SOA (verbatim — includes MA + HI + HHC + PDP)</strong> → Permission to Contact → MARx Permission → Verification of Medicare Info → Extra Help/Medicaid → Chronic Condition Q → VA Q → SEP code → Doctor Verification.</p>
+            <p class="qr-phase-note"><strong>At the SOA you've already said:</strong> <em>"I do need your permission, to discuss your Medicare Advantage, Hospital Indemnity, Home Healthcare, and prescription drug plan benefits."</em> That's your authority to talk about HI + HHC later in the call.</p>
+          </div>
+        </article>
+
+        <!-- Phase 2 -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">2</span>
+            <h2 class="qr-phase-title">NEADS Analysis <span class="qr-phase-eyebrow">(plant the seeds)</span></h2>
+            <span class="qr-stage stage-phase">Phase 2</span>
+          </div>
+          <div class="qr-phase-sub">Run NEADS + add the three discovery (NEPQ) seed questions</div>
+          <div class="qr-phase-body">
+            <p>Run the standard NEADS benefit questions (glasses, dental, hearing aids, transportation, OTC, groceries). When you reach the Health Questions section, add the three <strong>discovery (NEPQ-style) seed questions</strong>:</p>
+
+            <div class="qr-verbatim">
+              "How is your overall health? Any conditions you have?" <em style="color: #4B7797; font-style: normal;">[standard]</em>
+            </div>
+            <div class="qr-verbatim">
+              "Have you been to the hospital the last two years?" <em style="color: #4B7797; font-style: normal;">[standard — HI lead-in]</em>
+            </div>
+            <div class="qr-verbatim">
+              "Any surgeries coming up?" <em style="color: #4B7797; font-style: normal;">[standard — HI lead-in]</em>
+            </div>
+            <div class="qr-verbatim is-pitch">
+              ★ "Quick follow-up — looking at your plan, what's the hospital copay per day if you're admitted? Most MA plans run $200-400/day. If you were admitted for 4 days, that's $1,200-1,600 out of pocket. How would that feel if it hit your account next month?" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[HI SEED — surface the exposure]</em>
+            </div>
+            <div class="qr-verbatim is-pitch">
+              ★ "Different question — have you ever needed help around the house — bathing, dressing, getting around — even temporarily after an illness or surgery? Did you know Medicare doesn't actually cover that kind of daily-living help?" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[HHC SEED]</em>
+            </div>
+            <div class="qr-verbatim is-pitch">
+              ★ "And if you needed help like that for a few months — say after a fall or a stroke — who in your life would be doing that for you?" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[FAMILY-BURDEN SEED]</em>
+            </div>
+            <div class="qr-verbatim is-pitch">
+              ★ "Has anyone close to you — a parent, sibling, friend — been hospitalized or needed help at home in the last couple years? Do you know what they ended up paying out of pocket?" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[PAST-EXPERIENCE SEED]</em>
+            </div>
+
+            <p><strong>Loop their answers.</strong> <em>"Say more about that?"</em> The second articulation is more emotional than the first. They build their own case.</p>
+            <p><strong>The Implication follow-up</strong> (NEPQ-master move — use after any seed lands with concern): <em>"If something like that happened to you and you didn't have a way to cover it — how do you think it would play out?"</em> Forces them to mentally simulate the consequence. Prospects who simulate buy 3-5x more often than those who only acknowledge.</p>
+            <p>These four questions plant the hospital exposure, the daily-living gap, the family-burden concern, and surface their own observed experience. By the time you harvest later, they've already articulated four real problems to themselves.</p>
+          </div>
+        </article>
+
+        <!-- Phase 3 -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">3</span>
+            <h2 class="qr-phase-title">Soft Close <span class="qr-phase-eyebrow">(expectation-set)</span></h2>
+            <span class="qr-stage stage-phase">Phase 3</span>
+          </div>
+          <div class="qr-phase-sub">Standard MA soft close + ancillary preview</div>
+          <div class="qr-phase-body">
+            <div class="qr-verbatim">
+              "Great news, [Client Name]! You qualify for additional benefits. What I'll do is review these benefits with you on the phone right now, and then I'll send a physical copy in the mail.
+              <br><br>
+              ★ Now all these benefits are included in your new Medicare Advantage plan. There are also two supplemental products I want to walk you through after we get your MA set up — they're called Hospital Indemnity and Home Healthcare, and they work alongside your MA. I'll go over your MA plan first, then walk you through these two. Sound good?"
+            </div>
+            <p>Don't say "MA leaves gaps." Say "supplemental products work alongside." <strong>That distinction matters.</strong></p>
+          </div>
+        </article>
+
+        <!-- Phase 4 -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">4</span>
+            <h2 class="qr-phase-title">Pitch the MA plan + Medication Verification</h2>
+            <span class="qr-stage stage-phase">Phase 4</span>
+          </div>
+          <div class="qr-phase-sub">HHC tier match — gather fill cadence</div>
+          <div class="qr-phase-body">
+            <p>Standard plan pitch (Required Copays/Coinsurance, In-Network Benefits, Plan Benefits, Out-of-Network if PPO/PFFS) and Soft Closing Statement. Then Medication Verification — collect Rx info as standard, PLUS:</p>
+            <div class="qr-verbatim">
+              "Great, last thing on prescriptions — how many of those are brand-name versus generic, and how often are you filling them — monthly or every 90 days?"
+            </div>
+            <p>This data gates the HHC tier you'll pitch later (HHC Plan A / B / C).</p>
+          </div>
+        </article>
+
+        <!-- Phase 5 -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">5</span>
+            <h2 class="qr-phase-title">Complete the MA enrollment</h2>
+            <span class="qr-stage stage-phase">Phase 5</span>
+          </div>
+          <div class="qr-phase-sub">Standard enrollment flow</div>
+          <div class="qr-phase-body">
+            <p>Transition to Enrollment → Enrollment Permission → SunFire Enrollment → Confirmation Number → Customer service welcome message. Standard CPC MA flow.</p>
+            <p>After enrollment is submitted and the customer has the confirmation code written down, you arrive at <strong>the cross-sell harvest moment</strong>.</p>
+          </div>
+        </article>
+
+        <!-- Phase 6 · Harvest -->
+        <article class="qr-phase-card is-harvest">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">6</span>
+            <h2 class="qr-phase-title"><span class="qr-phase-star">★</span>THE HARVEST <span class="qr-phase-eyebrow" style="color: #1f6e5f;">(Scenario 3 — after a successful MA close)</span></h2>
+            <span class="qr-stage stage-pitch">Phase 6</span>
+          </div>
+          <div class="qr-phase-sub">Pivot AFTER MA enrollment is fully complete but BEFORE the Retention Statement</div>
+          <div class="qr-phase-body">
+            <p><strong>The NEPQ (discovery-questions) master move — delay the price until they want it.</strong> Don't drop premium until both products are presented and the Preference Question has landed. The flow below presents HI (Hospital Indemnity) mechanics → checks understanding → uses the Preference Question to surface "home" → presents HHC (Home Healthcare) + Rx mechanics → THEN reveals the combined number in <em>per-day</em> units (≈$1.50/day). Daily-unit framing lands far softer than monthly. They WANT it before they hear what it costs.</p>
+
+            <p><strong>Open with HI — the natural conversation entry:</strong></p>
+            <div class="qr-verbatim is-pitch">
+              "Now [Name], remember at the start of the call I mentioned the two supplemental products that go alongside your MA? Let me take 5 minutes and walk you through them. Earlier you mentioned [their hospital copay / family-help concern / Rx situation — pick the seed that landed hardest]. I want to show you how this fits.
+              <br><br>
+              The first one is called Hospital Indemnity Shield. It's a supplemental indemnity policy — it's not health insurance, it's separate from your Medicare. What it does is pay you cash directly when you're admitted to the hospital. So on a plan like yours with the $300/day copay, if you ended up admitted for 4 days, Hospital Indemnity would mail you a check for $1,200. The money is yours — you can use it for the hospital bill, for household expenses, for anything.
+              <br><br>
+              Does that make sense as how it works?"
+            </div>
+            <p class="qr-phase-note">[Pause. Wait for "yes" or a clarifying question. Loop if they say anything that hints at concern. <strong>Don't mention the premium yet.</strong> You're checking comprehension of the mechanic — not selling on price.]</p>
+
+            <p><strong>Bridge to HHC with the Preference Question — get them to verbalize "home" before you offer the home solution:</strong></p>
+            <div class="qr-verbatim is-pitch">
+              "Now, there's a second supplemental product that pairs alongside it for what happens AFTER the hospital. Before I show you how it works — quick question:
+              <br><br>
+              <strong>If you had an accident or a surgery and later had to choose between recovering in a nursing facility or recovering at home with someone coming over to help you bathe, dress, and get around — which would you want?"</strong>
+            </div>
+            <p class="qr-phase-note">[They'll say "home" — about 95% do. Loop it: <em>"Say more about that — why home?"</em> Their answer becomes the anchor for the HHC presentation. They just told you they want the thing HHC pays for.]</p>
+
+            <p><strong>Layer HHC — anchor to their answer:</strong></p>
+            <div class="qr-verbatim is-pitch">
+              "Right — and that's what most folks want. The catch is, Medicare doesn't actually cover daily-living help at home. That's true on Original Medicare, on Medicare Advantage, on Medigap — none of them cover it. So if you came home from the hospital weak — after a fall, or a stroke, or surgery — and you needed help bathing, dressing, getting around for a few weeks, that's all out of pocket. Or your family steps in.
+              <br><br>
+              The product is called Home Healthcare Shield. Also a supplemental indemnity policy, not health insurance. It pays you cash for daily-living help — $300 a day for up to 360 days if you qualify. Plus there's a $3,500 caregiver benefit that pays directly to a family member who helps you.
+              <br><br>
+              And there's something built into Home Healthcare that makes the math really work — a prescription reimbursement. Every time you fill a prescription, you email the receipt to UNL — they reimburse you $10 for every generic, $25 for brand names. So if you're filling 4 medications a month, you typically receive checks totaling $40-50 a month. Does that make sense?"
+            </div>
+            <p class="qr-phase-note">[Pause again. Confirm they understand HHC + Rx mechanic. <strong>Still no premium.</strong>]</p>
+
+            <p><strong>NOW reveal the combined math — in per-day units:</strong></p>
+            <div class="qr-verbatim is-pitch">
+              "OK so putting both products together — Hospital Indemnity for the admission, Home Healthcare for the recovery, plus the $3,500 caregiver benefit and the prescription reimbursement that funds most of it — here's the math.
+              <br><br>
+              The combined premium across both products is about $93 a month, drafted from your account. The Rx reimbursement of about $50 a month comes back to you separately, by check, after you submit receipts. So your net spending across both products lands around <strong>$43 a month — about a dollar fifty a day. Less than a cup of coffee.</strong>
+              <br><br>
+              These are two separate supplemental products. You can enroll in either one, both, or neither — they're independent.
+              <br><br>
+              How does that fit?"
+            </div>
+            <p class="qr-phase-note"><strong>Why this lands:</strong> The price hits AFTER they've heard the value and verbalized that they'd want to recover at home. By the time they hear "$1.50/day," their internal voice has already said "I'd want this." Daily-unit framing (vs. monthly) cuts perceived cost roughly in half emotionally. <strong>This is the highest-conversion sequence in the playbook.</strong></p>
+
+            <p><strong>Run the Close Sequence (Q1-Q4):</strong></p>
+            <ul class="qr-phase-q-list">
+              <li><strong>Q1:</strong> <em>"Do you feel like this could be the answer for you?"</em> [Stop talking. Wait.]</li>
+              <li><strong>Q2:</strong> <em>"Hold on — why do you feel like it is, though?"</em> [Silent. They sell themselves.]</li>
+              <li><strong>Q3:</strong> <em>"What specific parts of what we went over today feel like they'd help you the most?"</em></li>
+              <li><strong>Q4:</strong> <em>"Do you feel like this is something you can have that'll get you where you want to go?"</em></li>
+              <li><em>"Really, the next step is just confirming the application — takes about 10 minutes. Sound fair?"</em></li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Phase 6 alt · Pivot -->
+        <article class="qr-phase-card is-pivot">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">6</span>
+            <h2 class="qr-phase-title"><span class="qr-phase-star">★</span>THE PIVOT <span class="qr-phase-eyebrow" style="color: #b45309;">(Scenario 4 — when MA fails)</span></h2>
+            <span class="qr-stage stage-dq">Phase 6 alt</span>
+          </div>
+          <div class="qr-phase-sub">Don't end the call. Pivot using HI (Hospital Indemnity) as the rescue opener.</div>
+          <div class="qr-phase-body">
+            <p>When MA doesn't close (already enrolled in a plan they're keeping, not in valid SEP, plan they want isn't available, customer decides to stay put), DON'T end the call. Pivot to ancillary using <strong>HI (Hospital Indemnity)</strong> as the rescue opener.</p>
+
+            <p><strong>Verbatim pivot:</strong></p>
+            <div class="qr-verbatim is-warn">
+              "I hear you, [Name] — it sounds like your current MA plan is meeting your needs and you don't want to switch right now. Before I let you go though — earlier in the call you mentioned [their hospital copay / family concern / Rx burden]. I want to spend 3 minutes on this because the gap exists regardless of which Medicare plan you have, and there's something I can show you that helps.
+              <br><br>
+              Your current MA plan still has the daily hospital copay if you're admitted. And Medicare itself doesn't cover daily-living help at home — that's true on every plan. There are two separate supplemental products that work alongside any Medicare plan to help with both of those — they don't change anything about your current Medicare. Can I take 5 minutes?"
+            </div>
+
+            <p>Then run the HI → HHC pitch sequence from Phase 6 above. Close with Q1-Q4. Proceed to application.</p>
+          </div>
+        </article>
+
+        <!-- Phase 7 -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">7</span>
+            <h2 class="qr-phase-title">Referral Ask + The Application</h2>
+            <span class="qr-stage stage-phase">Phase 7</span>
+          </div>
+          <div class="qr-phase-sub">Right after Q2 — they just told you why this fits</div>
+          <div class="qr-phase-body">
+            <p>After Q2 (they just told you why this fits), BEFORE you start the application:</p>
+            <div class="qr-verbatim">
+              "While I have you — do you have a friend or family member who might benefit from coverage like this? No pressure, just thinking of who else this would be a fit for."
+            </div>
+            <p><strong>If they give a name</strong> — the referral has to call us inbound (TCPA / one-to-one consent rule). Give the customer your number to pass along:</p>
+            <div class="qr-verbatim">
+              "That's great. Here's how we have to handle it for compliance — they'd need to call us directly. I'll give you my direct number to pass along, and when they call in I'll take care of them. Sound good?"
+            </div>
+            <p class="qr-phase-note">Customer carries the introduction; referral self-initiates contact. (Don't outbound-call the referral — TCPA violation, $500-1,500/call.)</p>
+
+            <p>Then transition into the application:</p>
+            <div class="qr-verbatim">
+              "Great. I'm going to walk you through the application right here on the line — takes about 10 minutes. I'll ask the questions, you give the answers, then we'll do the signature."
+            </div>
+            <p>Run the application. Walk through demographics, plan selection, knockouts (you've already screened these in NEADS, so it's confirmation), beneficiary, banking for the draft.</p>
+          </div>
+        </article>
+
+        <!-- Phase 8 -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">8</span>
+            <h2 class="qr-phase-title">Signature <span class="qr-phase-eyebrow">(text code or 3-way with UNL)</span></h2>
+            <span class="qr-stage stage-phase">Phase 8</span>
+          </div>
+          <div class="qr-phase-sub">Two options — text code is the default</div>
+          <div class="qr-phase-body">
+            <p><strong>Default: Text confirmation code.</strong></p>
+            <div class="qr-verbatim is-pitch">
+              "For the signature, UNL will send a text with a confirmation code. The text can go to your phone, or to the phone of anyone who's with you right now. Once it comes through, you'll read me the code and we're done. Whose phone should I send it to?"
+            </div>
+            <p class="qr-phase-note">[Send text. Customer reads code back. Enter code. Signature complete.]</p>
+
+            <p><strong>Fallback: 3-way with UNL.</strong></p>
+            <div class="qr-verbatim">
+              "No problem — we'll do this another way. I'm going to bring UNL on the line and they'll confirm the signature with you verbally. Hold on one moment."
+            </div>
+            <p class="qr-phase-note">[Bring UNL onto the call. Introduce customer. UNL handles verbal signature on the recording.]</p>
+          </div>
+        </article>
+
+        <!-- Phase 9 -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">9</span>
+            <h2 class="qr-phase-title">Post-Sale 60 Seconds <span class="qr-phase-eyebrow">(chargeback prevention)</span></h2>
+            <span class="qr-stage stage-post">Phase 9</span>
+          </div>
+          <div class="qr-phase-sub">Walk through all three products' next steps + the Rx reimbursement setup</div>
+          <div class="qr-phase-body">
+            <p>After submission, BEFORE ending the call.</p>
+            <div class="qr-verbatim">
+              "You're all set. Let me give you the four things to know:
+              <br><br>
+              <strong>One —</strong> Your Medicare Advantage card arrives in 7-10 days. Your supplemental policy documents (Hospital Indemnity and Home Healthcare) arrive separately by mail or email within a couple weeks from UNL.
+              <br><br>
+              <strong>Two —</strong> Your premium drafts. Your MA itself doesn't have a premium (assuming $0 premium plan). For the supplemental products, you'll see drafts on [date] each month from UNL. Combined that's about $93 from your account each month.
+              <br><br>
+              <strong>Three —</strong> for the prescription reimbursement to work, you'll email your pharmacy receipts to UNL at <code style="font-family: monospace; background: rgba(45,90,122,0.08); padding: 0.05rem 0.3rem; border-radius: 3px; font-size: 0.85em;">claims@unlinsurance.com</code>. Include the pharmacy name, drug names, your name, date, and the RX code on each one. Save your receipts and submit them — usually monthly works best. You'll start receiving reimbursement checks within 2-3 weeks of submitting. If you have any questions, the UNL service number is <code style="font-family: monospace; background: rgba(45,90,122,0.08); padding: 0.05rem 0.3rem; border-radius: 3px; font-size: 0.85em;">800-635-1993</code>.
+              <br><br>
+              <strong>Four —</strong> within the next couple weeks you'll get a quick welcome call from UNL just confirming you're satisfied with what we set up. It's a normal verification call — just say yes — they're checking that I represented things to you correctly. If they call and you don't remember anything we talked about, call me back, OK?"
+            </div>
+          </div>
+        </article>
+
+        <!-- Phase 10 -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">10</span>
+            <h2 class="qr-phase-title">Retention Statement <span class="qr-phase-eyebrow">(covering all three products)</span></h2>
+            <span class="qr-stage stage-post">Phase 10</span>
+          </div>
+          <div class="qr-phase-sub">Frame ancillary as part of "you're all set"</div>
+          <div class="qr-phase-body">
+            <div class="qr-verbatim">
+              "Now I want to share something important. Over the next few weeks, you may receive calls or see ads claiming you can get extra benefits, cash, or groceries. You're all set — your Medicare Advantage is set, your supplemental coverage is set, you're fully protected. There's no need to enroll in anything else. Enrolling in multiple plans can cause cancellation of benefits. If it's not me calling you, you can safely ignore it. Otherwise, if you want to check any benefits you see, feel free to call me anytime, I'm here to assist as your agent, okay?
+              <br><br>
+              We're all finished. Congratulations on your new plan benefits, have a great day."
+            </div>
+            <p class="qr-phase-note"><strong>Update client info in EnrollHere + CRM</strong> as per standard MA flow + log ancillary enrollment codes.</p>
+          </div>
+        </article>
+
+      </section>
+      <!-- ============ END TAB PANEL 2 ============ -->
+
+    </main>
+
+    <!-- ============ SIDEBAR (sticky on desktop) ============ -->
+    <aside class="qr-sidebar" aria-label="In-call lookup">
+
+      <!-- ============ SIDEBAR A: COMPLIANCE NEVER-SAY ============ -->
+      <section class="qr-side-card is-compliance">
+        <div class="qr-side-head">
+          <div>
+            <div class="qr-side-eyebrow">Always visible</div>
+            <h2 class="qr-side-title"><span class="qr-star">★</span>Compliance: Never Say</h2>
+          </div>
+        </div>
+
+        <table class="qr-never">
+          <thead>
+            <tr>
+              <th style="width:48%">Never say</th>
+              <th style="width:52%">Say instead</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>"It only costs $3/month"</td>
+              <td>"Premium is $53; Rx reimbursement of ~$50 comes back separately by check; net spending ~$3-5/mo"</td>
+            </tr>
+            <tr>
+              <td>"Basically free"</td>
+              <td>"Net spending is very low after the reimbursement — but you pay the full $53 premium"</td>
+            </tr>
+            <tr>
+              <td>"Long-term care insurance"</td>
+              <td>"Supplemental indemnity policy that pays cash during home care"</td>
+            </tr>
+            <tr>
+              <td>"Replaces Medicare" / "better than Medicare"</td>
+              <td>"Supplemental policy. Does not change Medicare"</td>
+            </tr>
+            <tr>
+              <td>"Part of your Medicare" / "comes with MA"</td>
+              <td>"Separate supplemental product that works alongside Medicare"</td>
+            </tr>
+            <tr>
+              <td>"Hospital Indemnity is health insurance"</td>
+              <td>"Supplemental indemnity policy, NOT health insurance"</td>
+            </tr>
+            <tr>
+              <td>"These are bundled" / "you have to buy both"</td>
+              <td>"Two separate products; enroll in either, both, or neither"</td>
+            </tr>
+            <tr>
+              <td>"Buy HI and we'll discount via Rx"</td>
+              <td>"Rx is HHC's feature, paid regardless of HI"</td>
+            </tr>
+            <tr>
+              <td>"Save money on prescriptions"</td>
+              <td>"Plan reimburses $10/generic, $25/brand per fill"</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="qr-forbidden">
+          <strong>Forbidden on MA calls (NEVER):</strong> Life · Annuities · Final Expense · LTC · Any financial product.
+          <span class="qr-forbidden-note">SOA already covers HI + HHC. MCMG §70.4.3 (the CMS rule that permits same-call health-related cross-sell) is your authority.</span>
+        </div>
+      </section>
+
+      <!-- ============ SIDEBAR B: TOP 6 OBJECTIONS ============ -->
+      <section class="qr-side-card is-objections">
+        <div class="qr-side-head">
+          <div>
+            <div class="qr-side-eyebrow">Always visible</div>
+            <h2 class="qr-side-title"><span class="qr-star">★</span>Top 6 Objections</h2>
+          </div>
+        </div>
+
+        <div class="qr-obj">
+          <div class="qr-obj-head">
+            <span class="qr-obj-num">1</span>
+            <div class="qr-obj-q">"Here for Medicare, not extras"</div>
+          </div>
+          <div class="qr-obj-a"><em>"Not an extra — fills the gaps Medicare leaves. Rx reimbursement: $40-50/mo back."</em></div>
+        </div>
+
+        <div class="qr-obj">
+          <div class="qr-obj-head">
+            <span class="qr-obj-num">2</span>
+            <div class="qr-obj-q">"Sounds expensive"</div>
+          </div>
+          <div class="qr-obj-a">
+            First: <em>"What's the number in your head?"</em><br>
+            Then: <em>"HHC: $53 premium, ~$50 reimbursement back, net ~$3-5/mo. HI: $40/mo. Both: net ~$43/mo — $1.50/day."</em>
+          </div>
+        </div>
+
+        <div class="qr-obj">
+          <div class="qr-obj-head">
+            <span class="qr-obj-num">3</span>
+            <div class="qr-obj-q">"Think about it"</div>
+          </div>
+          <div class="qr-obj-a"><em>"Of the pieces — hospital, prescription savings, caregiver — is there one that doesn't feel like a fit?"</em></div>
+        </div>
+
+        <div class="qr-obj">
+          <div class="qr-obj-head">
+            <span class="qr-obj-num">4</span>
+            <div class="qr-obj-q">"Talk to spouse"</div>
+          </div>
+          <div class="qr-obj-a">
+            <strong>Real:</strong> <em>"I'll send a 1-pager; Tue or Wed callback?"</em><br>
+            <strong>Stall:</strong> <em>"Honest question — is this real, or a polite way of saying not for you?"</em>
+          </div>
+        </div>
+
+        <div class="qr-obj">
+          <div class="qr-obj-head">
+            <span class="qr-obj-num">5</span>
+            <div class="qr-obj-q">"Affect my Medicare?"</div>
+          </div>
+          <div class="qr-obj-a"><em>"No — supplemental. MA stays exactly the same. This sits on top and pays cash."</em></div>
+        </div>
+
+        <div class="qr-obj">
+          <div class="qr-obj-head">
+            <span class="qr-obj-num">6</span>
+            <div class="qr-obj-q">"Just send info"</div>
+          </div>
+          <div class="qr-obj-a">
+            <strong>Low rapport:</strong> <em>"Most who get email never open it. What's not landing?"</em><br>
+            <strong>OK rapport:</strong> <em>"I'll send a 1-pager NOW; let's review together."</em>
+          </div>
+        </div>
+      </section>
+
+    </aside>
+
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="qr-footer">
+    <div>
+      <strong>Quick Reference</strong> · Drill the Rx Reframe. Drill Q1-Q4. Tier-match. Run the script. Repeat.
+    </div>
+    <div class="mt-1.5 text-[0.7rem] opacity-80">
+      <a href="https://clearpathcoverage.com/unl-ancillary-playbook/" target="_top" rel="noopener">Ancillary Playbook</a>
+      <span class="qr-footer-pipe">·</span>
+      <a href="https://clearpathcoverage.com/unl-ancillary-agent-compensation/" target="_top" rel="noopener">Comp Model</a>
+      <span class="qr-footer-pipe">·</span>
+      <a href="https://clearpathcoverage.com/unl-rx-calculator/" target="_top" rel="noopener">Rx Calculator</a>
+    </div>
+    <div class="mt-1.5 text-[0.65rem] opacity-50 tracking-widest uppercase">Clear Path Coverage · Agent Reference · Internal</div>
+  </footer>
+
+  <!-- ============ TAB SWITCHING ============ -->
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll('.qr-tab');
+      var panels = document.querySelectorAll('.qr-tab-panel');
+
+      function activate(target) {
+        for (var i = 0; i < tabs.length; i++) {
+          var t = tabs[i];
+          var isMatch = t.getAttribute('data-tab-target') === target;
+          t.classList.toggle('is-active', isMatch);
+          t.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+        }
+        for (var j = 0; j < panels.length; j++) {
+          var p = panels[j];
+          var isPanelMatch = p.id === 'tab-panel-' + target;
+          p.classList.toggle('is-active', isPanelMatch);
+          if (isPanelMatch) {
+            p.removeAttribute('hidden');
+          } else {
+            p.setAttribute('hidden', '');
+          }
+        }
+        // Scroll main content to top on tab switch
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      for (var k = 0; k < tabs.length; k++) {
+        tabs[k].addEventListener('click', function (e) {
+          var target = e.currentTarget.getAttribute('data-tab-target');
+          if (target) activate(target);
+        });
+        tabs[k].addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            var current = e.currentTarget;
+            var arr = Array.prototype.slice.call(tabs);
+            var idx = arr.indexOf(current);
+            var nextIdx = e.key === 'ArrowRight' ? (idx + 1) % arr.length : (idx - 1 + arr.length) % arr.length;
+            var nextTab = arr[nextIdx];
+            nextTab.focus();
+            var target = nextTab.getAttribute('data-tab-target');
+            if (target) activate(target);
+          }
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
