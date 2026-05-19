@@ -1639,8 +1639,13 @@
       </button>
       <button id="tab-btn-script" class="qr-tab" role="tab" aria-selected="false" aria-controls="tab-panel-script" data-tab-target="script" type="button">
         <span class="qr-tab-num">2</span>
-        <span>Full Script</span>
-        <span class="qr-tab-meta">Verbatim end-to-end</span>
+        <span>MA Cross-Sell Script</span>
+        <span class="qr-tab-meta">For MA leads · verbatim</span>
+      </button>
+      <button id="tab-btn-ancillary" class="qr-tab" role="tab" aria-selected="false" aria-controls="tab-panel-ancillary" data-tab-target="ancillary" type="button">
+        <span class="qr-tab-num">3</span>
+        <span>Ancillary-Only Script</span>
+        <span class="qr-tab-meta">For HHC-direct leads · verbatim</span>
       </button>
     </div>
   </nav>
@@ -1699,7 +1704,7 @@
           <div class="qr-lex-def">The <strong>$3,500 caregiver benefit</strong> included in HHC Plan B and C. Pays the family member who provides care, not the customer.</div>
 
           <div class="qr-lex-term">Rx reimbursement</div>
-          <div class="qr-lex-def">A built-in feature of HHC. Customer emails receipts to <code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;background:white;padding:0.05rem 0.3rem;border-radius:3px;border:1px solid rgba(45,90,122,0.18);">claims@unlinsurance.com</code>; UNL mails them a check ($10/generic, $25/brand). Up to <strong>$50/month</strong> for Plan B.</div>
+          <div class="qr-lex-def">A built-in feature of HHC. Customer emails receipts to <code style="font-family:'JetBrains Mono',monospace;font-size:0.78rem;background:white;padding:0.05rem 0.3rem;border-radius:3px;border:1px solid rgba(45,90,122,0.18);">claims@unlinsurance.com</code>; UNL mails them a check at <strong>$10/generic, $25/brand per fill</strong>. <strong>Annual cap by tier:</strong> Plan A <strong>$300/yr</strong> · Plan B <strong>$600/yr</strong> (most common fit) · Plan C <strong>$900/yr</strong>. <em>"~$50/month" is a typical Plan B example (3 generics + 1 brand filled monthly = ~$55/mo) — not a guaranteed monthly amount. Calculate per the customer's actual meds × tier.</em></div>
 
           <div class="qr-lex-term">NEPQ</div>
           <div class="qr-lex-def">Neuro-Emotional Persuasion Questioning — the discovery-question method we use. Translation: <strong>ask the customer questions</strong> instead of pitching at them.</div>
@@ -1714,7 +1719,7 @@
           <div class="qr-lex-def">Disqualification — when a health knockout fires (cancer, insulin diabetes, etc.) and the customer can't qualify for one of the products. <strong>Handle gracefully; pivot if possible.</strong></div>
 
           <div class="qr-lex-term">Q1 / Q2 / Q3 / Q4</div>
-          <div class="qr-lex-def">The four close-sequence questions in order. <strong>Q1:</strong> "Do you feel like this could be the answer for you?" <strong>Q2:</strong> "Why do you feel like it is, though?" <strong>Q3:</strong> "What parts will help you most?" <strong>Q4:</strong> "Do you feel like this is something you can have?"</div>
+          <div class="qr-lex-def">The four close-sequence questions in order. <strong>Q1:</strong> "Do you feel like this could be the answer for you?" <strong>Q2:</strong> "Hold on — why do you feel like it is, though?" <strong>Q3:</strong> "What specific parts of what we went over today do you feel are going to really help you the most?" <strong>Q4:</strong> "Do you feel like this is something you can have that'll get you where you want to go?"</div>
         </div>
       </article>
 
@@ -1878,7 +1883,7 @@
 
         <div class="qr-seed">
           <span class="qr-seed-label">HI seed</span>
-          <div class="qr-seed-q">"If you were admitted to the hospital next month, do you know what your plan's copay would be per day? On most MA plans it's $200-400/day. A 4-day stay = $1,200-1,800 out of pocket. How would that feel if it hit your account next month?"</div>
+          <div class="qr-seed-q">"If you were admitted to the hospital next month, do you know what your plan's copay would be per day? On most MA plans it's $200-$450/day. A 4-day stay = $1,200-$1,800 out of pocket. <strong>If that bill landed next month — is that the kind of expense that would come out of savings, or is there somewhere else you'd lean on?</strong>"</div>
         </div>
 
         <div class="qr-seed">
@@ -1941,19 +1946,22 @@
               <tr>
                 <th>Customer profile</th>
                 <th>HHC plan</th>
-                <th>AP (annual premium)</th>
-                <th>Rx cap</th>
+                <th>Daily benefit</th>
+                <th>Total max</th>
+                <th>AP</th>
+                <th>Rx cap/yr</th>
                 <th>Y1 (agent)</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>1-2 meds, generic</td><td><strong>HHC Plan A</strong></td><td>~$365</td><td>$300</td><td>$91</td></tr>
-              <tr><td>3-5 meds, mixed <span class="qr-mini qr-mini-accent">default</span></td><td><strong>HHC Plan B</strong></td><td>~$640</td><td>$600</td><td><strong>$160</strong></td></tr>
-              <tr><td>6+ meds, brand</td><td><strong>HHC Plan C</strong></td><td>~$941</td><td>$900</td><td>$235</td></tr>
+              <tr><td>1-2 meds, generic</td><td><strong>HHC Plan A</strong></td><td><strong>$150/day</strong></td><td>$50,000</td><td>~$365</td><td>$300</td><td>$91</td></tr>
+              <tr><td>3-5 meds, mixed <span class="qr-mini qr-mini-accent">default</span></td><td><strong>HHC Plan B</strong></td><td><strong>$300/day</strong></td><td>$100,000</td><td>~$640</td><td>$600</td><td><strong>$160</strong></td></tr>
+              <tr><td>6+ meds, brand</td><td><strong>HHC Plan C</strong></td><td><strong>$450/day</strong></td><td>$150,000</td><td>~$941</td><td>$900</td><td>$235</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="qr-tip"><strong>State gotchas:</strong> KY has no Rx rider. CO / DE / SD pay adjusted (lower) commission. 60-day Rx waiting period on every HHC policy.</div>
+        <div class="qr-tip"><strong>State gotchas:</strong> KY has no Rx rider. CO / DE / SD pay adjusted (lower) commission. 60-day Rx waiting period on every HHC policy. <strong>Restore window: 180 days without use → benefit fully restores</strong> (not one-and-done).</div>
+        <div class="qr-tip" style="margin-top:0.5rem;"><strong>★ Why we lean Plan B in examples:</strong> 3-5 meds + monthly fills is the most common profile by far, so the script defaults to Plan B's $53/mo premium and ~$50/mo Rx reimbursement. <strong>But always quote the customer's actual tier</strong> — Plan A customer hears ~$30/mo premium with $20-30/mo Rx; Plan C customer hears ~$78/mo premium with $60-75/mo Rx. Pitching Plan B numbers to a Plan A customer creates a refund call.</div>
 
         <div class="qr-trigger">
           <em>HHC trigger:</em> A licensed practitioner certifies the customer has cognitive impairment OR is unable to perform <strong>2 of 6 ADLs (Activities of Daily Living)</strong> — bathing · dressing · toileting · transferring · eating · continence. No prior hospitalization required.
@@ -2113,7 +2121,7 @@
           </div>
           <div class="qr-q-item">
             <span class="qr-q-tag">Q3</span>
-            <div class="qr-q-text">"What specific parts of what we went over today do you feel are going to help you the most?"</div>
+            <div class="qr-q-text">"What specific parts of what we went over today do you feel are going to really help you the most?"</div>
           </div>
           <div class="qr-q-item">
             <span class="qr-q-tag">Q4</span>
@@ -2287,43 +2295,56 @@
 
         <!-- Intro -->
         <div class="qr-script-intro">
-          <div class="qr-script-intro-eyebrow">The full script · End-to-end</div>
+          <div class="qr-script-intro-eyebrow">MA Cross-Sell Script · End-to-end · For MA inbound leads</div>
           <div class="qr-script-intro-title">The verbatim integrated CPC MA + Ancillary call</div>
           <div class="qr-script-intro-body">
-            <p style="margin-bottom: 0.7rem;">This is the verbatim end-to-end call flow — both <strong>Scenario 3</strong> (MA closes → harvest ancillary) and <strong>Scenario 4</strong> (MA fails → pivot to ancillary). Designed to read along during early cross-sell calls until muscle memory builds.</p>
-            <p style="margin-bottom: 0;">The standard MA portions of Phase 1 are compressed (reference the full MA script); the cross-sell additions are shown in detail. <strong>Phase 6 (Harvest)</strong> and <strong>Phase 6 alt (Pivot)</strong> are the centerpiece moves — drill those first.</p>
+            <p style="margin-bottom: 0.7rem;"><strong>Use this script when:</strong> the prospect came in through a Medicare Advantage lead source — they're calling about MA, you lead with MA, and you harvest HI/HHC after MA closes (or pivot if MA fails). This is the script for ~95% of CPC calls today.</p>
+            <p style="margin-bottom: 0.7rem;">Full verbatim end-to-end — from intro greeting through SOA capture, MA enrollment, cross-sell harvest, close, application, signature, post-sale. Both <strong>Scenario 3</strong> (MA closes → harvest ancillary) and <strong>Scenario 4</strong> (MA fails → pivot to ancillary) paths are covered.</p>
+            <p style="margin-bottom: 0;"><strong>If the prospect came in through an HHC-only / ancillary lead instead → use Tab 3 (Ancillary-Only Script).</strong> Different compliance scope, different opener, no MA discussion.</p>
           </div>
-        </div>
-
-        <!-- Reference: TPMO + SOA -->
-        <div class="qr-reference-card">
-          <div class="qr-reference-eyebrow">Compliance reference · Verbatim</div>
-          <h3 class="qr-reference-title">TPMO Disclaimer + Verbal SOA (Scope of Appointment)</h3>
-
-          <span class="qr-reference-label">TPMO (Third-Party Marketing Organization) Disclaimer — within first 60 seconds</span>
-          <div class="qr-verbatim is-warn">
-            "You do not have to provide any health information, unless it's used to determine your eligibility to enroll. We do not offer every plan available in your area. Any information we provide is limited to those plans we do offer in your area. Please contact Medicare.gov or 1-800-MEDICARE to get information on all of your options."
-          </div>
-
-          <span class="qr-reference-label">Verbal SOA — your authority for HI (Hospital Indemnity) + HHC (Home Healthcare)</span>
-          <div class="qr-verbatim">
-            "Clear Path Coverage is contracted by multiple Medicare plan providers and does not work directly for the Federal government. Plans are insured or covered by a Medicare Advantage organization with a Medicare contract and/or a Medicare-approved Part D sponsor. Enrollment in the plan depends on the plan's contract renewal with Medicare. By talking with me, you are under no obligation to enroll, your current or future Medicare enrollment status will not be impacted, and you will not automatically be enrolled in a plan. <strong>I do need your permission, to discuss your Medicare Advantage, Hospital Indemnity, Home Healthcare, and prescription drug plan benefits.</strong> Do I have your permission to continue?"
-          </div>
-
-          <div class="qr-tip" style="margin-top: 0.85rem;"><strong>The SOA (Scope of Appointment) already authorizes HI + HHC.</strong> Cross-sell isn't a new motion — it's the script doing what it was designed to do. No further compliance step needed for the cross-sell.</div>
         </div>
 
         <!-- Phase 1 -->
         <article class="qr-phase-card">
           <div class="qr-phase-head">
             <span class="qr-phase-num">1</span>
-            <h2 class="qr-phase-title">Standard MA opening <span class="qr-phase-eyebrow">(unchanged)</span></h2>
+            <h2 class="qr-phase-title">Standard MA opening <span class="qr-phase-eyebrow">(verbatim — compliance foundation)</span></h2>
             <span class="qr-stage stage-phase">Phase 1</span>
           </div>
-          <div class="qr-phase-sub">Intro through Doctor Verification</div>
+          <div class="qr-phase-sub">From "Hello" through SOA + Doctor Verification</div>
           <div class="qr-phase-body">
-            <p>Intro → Privacy Statement → Value Statement → Carrier confirmation → <strong>TPMO Disclaimer (verbatim, within first 60 seconds)</strong> → Identify Customer &amp; Authorization → <strong>Verbal SOA (verbatim — includes MA + HI + HHC + PDP)</strong> → Permission to Contact → MARx Permission → Verification of Medicare Info → Extra Help/Medicaid → Chronic Condition Q → VA Q → SEP code → Doctor Verification.</p>
-            <p class="qr-phase-note"><strong>At the SOA you've already said:</strong> <em>"I do need your permission, to discuss your Medicare Advantage, Hospital Indemnity, Home Healthcare, and prescription drug plan benefits."</em> That's your authority to talk about HI + HHC later in the call.</p>
+            <p><strong>This is the compliance foundation for the entire call.</strong> The verbal SOA you capture here is what gives you the authority to discuss HI + HHC later. Drill verbatim — every line — even when you've done it a thousand times.</p>
+
+            <p style="margin-top: 0.85rem;"><strong>Intro greeting</strong> — they called in, assume engagement, don't ask for permission:</p>
+            <div class="qr-verbatim">
+              "Hi [Name], this is [Your Name] with Clear Path Coverage — I'm a licensed Medicare specialist. Thanks for reaching out today. I see you were looking into Medicare options — let me see what's available for you in your area."
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Privacy + Recording Disclosure:</strong></p>
+            <div class="qr-verbatim">
+              "Just so you know, this call is being recorded for quality and compliance purposes. Everything we discuss is private and protected. Is that okay with you?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>TPMO (Third-Party Marketing Organization) Disclaimer</strong> — required verbatim within the first 60 seconds:</p>
+            <div class="qr-verbatim is-warn">
+              "You do not have to provide any health information, unless it's used to determine your eligibility to enroll. We do not offer every plan available in your area. Any information we provide is limited to those plans we do offer in your area. Please contact Medicare.gov or 1-800-MEDICARE to get information on all of your options."
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>★ Verbal SOA — your authority for HI + HHC (verbatim):</strong></p>
+            <div class="qr-verbatim">
+              "Clear Path Coverage is contracted by multiple Medicare plan providers and does not work directly for the Federal government. Plans are insured or covered by a Medicare Advantage organization with a Medicare contract and/or a Medicare-approved Part D sponsor. Enrollment in the plan depends on the plan's contract renewal with Medicare. By talking with me, you are under no obligation to enroll, your current or future Medicare enrollment status will not be impacted, and you will not automatically be enrolled in a plan. <strong>I do need your permission, to discuss your Medicare Advantage, Hospital Indemnity, Home Healthcare, and prescription drug plan benefits.</strong> Do I have your permission to continue?"
+            </div>
+            <p class="qr-phase-note"><strong>When the customer says "yes" to that SOA, you have the legal authority to discuss HI + HHC for the rest of the call.</strong> The SOA already authorizes the cross-sell — no additional compliance step is needed when you transition in Phase 6. <strong>If you skip HI + HHC from the SOA list, you cannot cross-sell on this call.</strong></p>
+
+            <p style="margin-top: 0.85rem;"><strong>Remaining Phase 1 flow</strong> (script your own carrier-specific language):</p>
+            <ul style="margin: 0.5rem 0 0 1rem;">
+              <li>Identify Customer + Authorization — name, DOB, address</li>
+              <li>Permission to Contact + MARx Permission</li>
+              <li>Verification of Medicare info — Part A + B effective dates</li>
+              <li>Extra Help / Medicaid check (also your <strong>CPC Fit Filter for Medicaid</strong> — graceful DQ if yes)</li>
+              <li>Chronic condition / VA / SEP code questions</li>
+              <li>Doctor Verification</li>
+            </ul>
           </div>
         </article>
 
@@ -2331,12 +2352,14 @@
         <article class="qr-phase-card">
           <div class="qr-phase-head">
             <span class="qr-phase-num">2</span>
-            <h2 class="qr-phase-title">NEADS Analysis <span class="qr-phase-eyebrow">(plant the seeds)</span></h2>
+            <h2 class="qr-phase-title">NEADS Analysis <span class="qr-phase-eyebrow">(plant the seeds + screen knockouts as advocacy)</span></h2>
             <span class="qr-stage stage-phase">Phase 2</span>
           </div>
           <div class="qr-phase-sub">Run NEADS + add the three discovery (NEPQ) seed questions</div>
           <div class="qr-phase-body">
-            <p>Run the standard NEADS benefit questions (glasses, dental, hearing aids, transportation, OTC, groceries). When you reach the Health Questions section, add the three <strong>discovery (NEPQ-style) seed questions</strong>:</p>
+            <p>Run the standard NEADS benefit questions (glasses, dental, hearing aids, transportation, OTC, groceries). When you reach the Health Questions section, add the four <strong>discovery (NEPQ-style) seed questions</strong>:</p>
+
+            <div class="qr-tip" style="margin-bottom: 0.7rem;"><strong>★ Frame health questions as advocacy, not interrogation.</strong> The NEADS health questions double as your HI/HHC knockout screen. Optional reframe before health questions: <em>"Before I walk you through everything that's available, let me just confirm a few things to make sure it's a fit — I don't want to waste your time on something you're not eligible for."</em> This converts knockout-screening from interrogation into advocacy.</div>
 
             <div class="qr-verbatim">
               "How is your overall health? Any conditions you have?" <em style="color: #4B7797; font-style: normal;">[standard]</em>
@@ -2348,21 +2371,27 @@
               "Any surgeries coming up?" <em style="color: #4B7797; font-style: normal;">[standard — HI lead-in]</em>
             </div>
             <div class="qr-verbatim is-pitch">
-              ★ "Quick follow-up — looking at your plan, what's the hospital copay per day if you're admitted? Most MA plans run $200-400/day. If you were admitted for 4 days, that's $1,200-1,600 out of pocket. How would that feel if it hit your account next month?" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[HI SEED — surface the exposure]</em>
+              ★ "Quick follow-up — do you know what your plan's hospital copay is per day if you got admitted? Most MA plans run $200-$450/day. A typical 4-day stay lands a $1,200-$1,800 bill 30 days after you get home. <strong>If that bill landed next month — is that the kind of expense that would come out of savings, or is there somewhere else you'd lean on?</strong>" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[HI SEED — NEPQ consequence framing]</em>
             </div>
             <div class="qr-verbatim is-pitch">
-              ★ "Different question — have you ever needed help around the house — bathing, dressing, getting around — even temporarily after an illness or surgery? Did you know Medicare doesn't actually cover that kind of daily-living help?" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[HHC SEED]</em>
+              ★ "Different question — say you had a hip replacement, very common procedure. Medicare covers the surgery and the rehab facility. But when it's time to go home and you need someone to come help you a few hours a day during recovery — <strong>Medicare won't touch that.</strong> You'd be paying out of pocket and daily home care runs $25-$40 an hour. <strong>If you needed that for two months, how would that hit your savings?</strong>" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[HHC SEED — concrete scenario + dollar anchor]</em>
             </div>
             <div class="qr-verbatim is-pitch">
-              ★ "And if you needed help like that for a few months — say after a fall or a stroke — who in your life would be doing that for you?" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[FAMILY-BURDEN SEED]</em>
+              ★ "And if you needed help like that for a few months — say after a fall or a stroke — who in your life would step in to help you?" <strong>[Write down their EXACT answer.]</strong> "And if it was your [exact relationship], would they need to take time off work to do that?" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[FAMILY-BURDEN SEED — exact relationship + burden follow-up]</em>
             </div>
             <div class="qr-verbatim is-pitch">
-              ★ "Has anyone close to you — a parent, sibling, friend — been hospitalized or needed help at home in the last couple years? Do you know what they ended up paying out of pocket?" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[PAST-EXPERIENCE SEED]</em>
+              ★ "Has anyone close to you — a parent, sibling, friend — been hospitalized or needed help at home in the last couple years? <strong>How did that go financially for them or for their family?</strong>" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[PAST-EXPERIENCE SEED — softer financial framing]</em>
             </div>
 
-            <p><strong>Loop their answers.</strong> <em>"Say more about that?"</em> The second articulation is more emotional than the first. They build their own case.</p>
-            <p><strong>The Implication follow-up</strong> (NEPQ-master move — use after any seed lands with concern): <em>"If something like that happened to you and you didn't have a way to cover it — how do you think it would play out?"</em> Forces them to mentally simulate the consequence. Prospects who simulate buy 3-5x more often than those who only acknowledge.</p>
-            <p>These four questions plant the hospital exposure, the daily-living gap, the family-burden concern, and surface their own observed experience. By the time you harvest later, they've already articulated four real problems to themselves.</p>
+            <p><strong>Loop their answers.</strong> <em>"Say more about that?"</em> The second articulation is more emotional than the first.</p>
+
+            <p style="margin-top: 0.85rem;"><strong>★ AFTER the seed that lands hardest — fire the Implication follow-up:</strong></p>
+            <div class="qr-verbatim is-pitch">
+              "If something like that happened to you and you didn't have a way to cover it — <strong>how do you think it would play out?</strong>" <em style="color: #1f6e5f; font-style: normal; font-weight: 600;">[★ THE IMPLICATION — stay silent after they answer]</em>
+            </div>
+            <p><em>Single highest-leverage NEPQ move. Forces them to mentally simulate the bad outcome. Prospects who simulate convert at <strong>3-5x</strong> the rate of prospects who only acknowledge the abstract risk. <strong>Stay completely silent</strong> after asking — let them work through it out loud.</em></p>
+
+            <p>These four seeds + the Implication follow-up plant the hospital exposure, the daily-living gap, the family-burden concern, the past-experience validation, AND the consequence simulation. By the time you harvest later, they've articulated four real problems <em>and felt the weight of one of them happening to them personally.</em></p>
           </div>
         </article>
 
@@ -2428,7 +2457,7 @@
 
             <p><strong>Open with HI — the natural conversation entry:</strong></p>
             <div class="qr-verbatim is-pitch">
-              "Now [Name], remember at the start of the call I mentioned the two supplemental products that go alongside your MA? Let me take 5 minutes and walk you through them. Earlier you mentioned [their hospital copay / family-help concern / Rx situation — pick the seed that landed hardest]. I want to show you how this fits.
+              "Last thing before I let you go, [Name] — earlier you mentioned [their seed answer — e.g. 'how a $1,500 hospital bill would hit your savings hard', or 'not wanting your daughter to take time off work']. There's actually a way to handle that exact situation. Worth a couple of minutes to walk you through how it works? [After yes.] So the first product is called Hospital Indemnity Shield.
               <br><br>
               The first one is called Hospital Indemnity Shield. It's a supplemental indemnity policy — it's not health insurance, it's separate from your Medicare. What it does is pay you cash directly when you're admitted to the hospital. So on a plan like yours with the $300/day copay, if you ended up admitted for 4 days, Hospital Indemnity would mail you a check for $1,200. The money is yours — you can use it for the hospital bill, for household expenses, for anything.
               <br><br>
@@ -2470,7 +2499,7 @@
             <ul class="qr-phase-q-list">
               <li><strong>Q1:</strong> <em>"Do you feel like this could be the answer for you?"</em> [Stop talking. Wait.]</li>
               <li><strong>Q2:</strong> <em>"Hold on — why do you feel like it is, though?"</em> [Silent. They sell themselves.]</li>
-              <li><strong>Q3:</strong> <em>"What specific parts of what we went over today feel like they'd help you the most?"</em></li>
+              <li><strong>Q3:</strong> <em>"What specific parts of what we went over today do you feel are going to really help you the most?"</em></li>
               <li><strong>Q4:</strong> <em>"Do you feel like this is something you can have that'll get you where you want to go?"</em></li>
               <li><em>"Really, the next step is just confirming the application — takes about 10 minutes. Sound fair?"</em></li>
             </ul>
@@ -2593,6 +2622,379 @@
 
       </section>
       <!-- ============ END TAB PANEL 2 ============ -->
+
+      <!-- ============ TAB PANEL 3: ANCILLARY-ONLY SCRIPT ============ -->
+      <section id="tab-panel-ancillary" class="qr-tab-panel" role="tabpanel" aria-labelledby="tab-btn-ancillary" hidden>
+
+        <!-- Intro -->
+        <div class="qr-script-intro">
+          <div class="qr-script-intro-eyebrow">Ancillary-Only Script · End-to-end · For HHC-direct leads</div>
+          <div class="qr-script-intro-title">The verbatim NEPQ-style ancillary-only call flow</div>
+          <div class="qr-script-intro-body">
+            <p style="margin-bottom: 0.7rem;"><strong>Use this script when:</strong> the prospect came in through an HHC + Rx ad (not a Medicare ad). They named home healthcare or the prescription benefit when they reached out — not Medicare.</p>
+            <p style="margin-bottom: 0.7rem;"><strong>Compliance critical:</strong> the SOA on this call covers <strong>ancillary categories only</strong>. You cannot discuss Medicare Advantage mid-call. If they ask about MA, route them to a separate inbound MA call.</p>
+            <p style="margin-bottom: 0;"><strong>Call length:</strong> typically 15-25 min (faster than MA cross-sell because no MA enrollment to run). 9 phases: Open &amp; Screen → Situation → Gap Education → Consequence → Pre-Qualify → Solution → Commitment → Objection Handling → Signature + Post-Sale.</p>
+          </div>
+        </div>
+
+        <!-- Phase 1: Open & Screen -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">1</span>
+            <h2 class="qr-phase-title">Open &amp; Screen <span class="qr-phase-eyebrow">(eligibility + plan type + warm)</span></h2>
+            <span class="qr-stage stage-phase">Phase 1</span>
+          </div>
+          <div class="qr-phase-sub">Confirm eligibility, identify plan type, warm the call — before touching pain</div>
+          <div class="qr-phase-body">
+            <p><strong>Warm callback opener</strong> (immediate, ~60 sec from form submit):</p>
+            <div class="qr-verbatim">
+              "Hi [first name], this is [agent] with Clear Path Coverage. You just reached out about the home healthcare plan with the prescription reimbursement — got your info about 30 seconds ago. Wanted to follow up while you're still thinking about it. Is now a good time?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Delayed callback opener</strong> (15 min to a few hours):</p>
+            <div class="qr-verbatim">
+              "Hi [first name], this is [agent] with Clear Path Coverage. Following up — you reached out earlier today about the home healthcare plan with the prescription benefit. Wanted to circle back while it's still fresh. Is now a good time?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>If they say "I don't remember signing up":</strong></p>
+            <div class="qr-verbatim">
+              "Oh, fair — your information was passed to us through a senior benefits service you reached out to. Sometimes folks click on something and don't think much of it. Either way, you've got a minute — is it okay if I ask a couple quick questions to see if there's anything here that fits for you? <strong>If it's not a fit, I'll tell you straight.</strong>"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Recording disclosure:</strong></p>
+            <div class="qr-verbatim">
+              "Just so you know, this call is being recorded for quality and compliance purposes. Is that okay?"
+            </div>
+
+            <p class="qr-phase-note"><strong>★ No formal SOA needed on ancillary-only calls.</strong> CMS Scope of Appointment is required for Medicare Advantage / Part D sales — it does NOT apply to ancillary indemnity policies. The customer's intake form / inbound call IS the consent. <strong>BUT — you cannot discuss MA on this call without separate authorization.</strong> If they ask about MA mid-call, route them to a separate MA inbound call (see Phase 8). Non-negotiable.</p>
+
+            <p style="margin-top: 0.85rem;"><strong>Medicaid screen — first fit filter:</strong></p>
+            <div class="qr-verbatim">
+              "And just to make sure I have the right picture — are you on Medicaid at all, or just Medicare?"
+            </div>
+            <p>If Medicaid → graceful DQ. Don't pitch.</p>
+
+            <p style="margin-top: 0.85rem;"><strong>Plan type identification — second fit filter:</strong></p>
+            <div class="qr-verbatim">
+              "Just so I don't over- or under-cover you — do you have a Medicare Advantage plan, like through Humana or Aetna, or do you have a Medicare Supplement? Or you might not be on Medicare at all — which is fine either way."
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>If unsure</strong>, two proxy questions:</p>
+            <div class="qr-verbatim">
+              "Does your plan include dental and vision coverage?" · "Do you pay a co-pay when you see a specialist?"
+            </div>
+            <p><em>Yes to either = likely MA. No to both = likely Medigap.</em></p>
+
+            <p style="margin-top: 0.85rem;"><strong>Pitch routing:</strong></p>
+            <ul style="margin: 0.5rem 0 0 1rem;">
+              <li><strong>Medicare Advantage</strong> → both HI + HHC in play</li>
+              <li><strong>Medicare Supplement</strong> → skip HI; pitch HHC + Rx only</li>
+              <li><strong>Not on Medicare</strong> → both products still fit (standalone indemnity, not Medicare-coordinated)</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Phase 2: Situation -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">2</span>
+            <h2 class="qr-phase-title">Situation <span class="qr-phase-eyebrow">(coverage + family + health + Rx)</span></h2>
+            <span class="qr-stage stage-phase">Phase 2</span>
+          </div>
+          <div class="qr-phase-sub">Map their world — anchor "my coverage is fine" before the gap reveal</div>
+          <div class="qr-phase-body">
+            <p><strong>Coverage satisfaction</strong> (anchor positive feeling — makes gap reveal in Phase 3 land harder):</p>
+            <div class="qr-verbatim">
+              "Has your [Advantage plan / supplement / current setup] been treating you pretty well for your regular doctor visits and things like that?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Living situation + support network:</strong></p>
+            <div class="qr-verbatim">
+              "Are you living on your own right now, or do you have family nearby — a spouse, kids, someone close?"
+            </div>
+            <div class="qr-verbatim">
+              "If something were to happen and you needed daily help at home temporarily — is there someone who could step in for you?"
+            </div>
+            <p class="qr-phase-note"><strong>★ Write down their EXACT relationship — daughter, son, wife, etc.</strong> "Your daughter" lands 3x harder than "your family" in Phase 4 and Phase 6.</p>
+
+            <p style="margin-top: 0.85rem;"><strong>Health baseline</strong> (soft — NOT the UW screen, that's Phase 5):</p>
+            <div class="qr-verbatim">
+              "And just so I have the full picture — are you generally in pretty good health, or have you had any health events recently?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Prescriptions</strong> (gather now, use in Phase 6 — do NOT mention reimbursement yet):</p>
+            <div class="qr-verbatim">
+              "Do you take any prescription medications? And do you know if they're generic or brand name? And do you fill those monthly or every 90 days?"
+            </div>
+          </div>
+        </article>
+
+        <!-- Phase 3: Gap Education -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">3</span>
+            <h2 class="qr-phase-title">Gap Education <span class="qr-phase-eyebrow">(install the problem)</span></h2>
+            <span class="qr-stage stage-phase">Phase 3</span>
+          </div>
+          <div class="qr-phase-sub">Information, not a pitch — do NOT mention any product yet</div>
+          <div class="qr-phase-body">
+            <p><strong>The Medicare home care gap</strong> (say this to all prospects regardless of plan):</p>
+            <div class="qr-verbatim">
+              "So here's something that catches most people off guard — and honestly most agents never take the time to explain this. Medicare does a great job covering your hospital stay and your rehab facility. But the moment you're discharged home, the coverage for day-to-day personal care — having someone help you get dressed, cook, bathe, manage your medications — that stops. <strong>Medicare pays $0 for that kind of daily help at home.</strong>"
+            </div>
+            <p class="qr-phase-note"><strong>★ Pause 2-3 seconds after "$0 for that."</strong> Do NOT fill the silence. The gap is doing the work.</p>
+
+            <p style="margin-top: 0.85rem;"><strong>Make it real + dollar anchor:</strong></p>
+            <div class="qr-verbatim">
+              "Let me give you a quick example. Say you had a hip replacement — very common procedure. Medicare covers the surgery, covers the rehab facility. But when it's time to go home, if you need someone to come help you for a few hours a day during recovery, Medicare won't touch that. <strong>You're paying out of pocket — and daily home care runs $25 to $40 an hour.</strong> A few hours a day for two months hits $3,000-$5,000 out of pocket fast."
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Hospital gap — Medicare Advantage prospects only:</strong></p>
+            <div class="qr-verbatim">
+              "There's also a hospital piece most people on Advantage plans don't realize until they see the bill. On most Advantage plans there's a co-pay for every day you're in the hospital — typically $200–$450 per day for the first 5–7 days. If you stayed 4 days, that's a bill of $1,200-$1,800 showing up 30 days after you get home."
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>★ The awareness check — invite their reaction:</strong></p>
+            <div class="qr-verbatim">
+              "Was that something you were already aware of, or is that kind of news to you?"
+            </div>
+            <div class="qr-verbatim">
+              "Did anyone walk you through what actually happens once you leave the hospital and go home?"
+            </div>
+            <p><em>Either answer moves you forward. "I didn't know" = problem awareness installed. "Yes I knew" → ask <strong>"And how have you planned for covering that?"</strong></em></p>
+          </div>
+        </article>
+
+        <!-- Phase 4: Consequence -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">4</span>
+            <h2 class="qr-phase-title">Consequence Questions <span class="qr-phase-eyebrow">(make them feel the stakes)</span></h2>
+            <span class="qr-stage stage-phase">Phase 4</span>
+          </div>
+          <div class="qr-phase-sub">Questions, not statements. Pause after every one. Never fill the silence yourself.</div>
+          <div class="qr-phase-body">
+            <p><strong>Financial consequence:</strong></p>
+            <div class="qr-verbatim">
+              "If you needed daily help at home for a few months and Medicare wasn't covering it — how would you handle that financially?"
+            </div>
+            <div class="qr-verbatim">
+              "Home health care averages close to $5,000 a month out of pocket. If you needed that for several months, how would that hit your retirement savings?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>★ Independence consequence — the Preference Question:</strong></p>
+            <div class="qr-verbatim">
+              "If you had an accident or a surgery and later had to choose between recovering in a nursing facility or recovering at home with someone coming over to help you bathe, dress, and get around — which would you want?"
+            </div>
+            <p><em>~95% say "home." That's your anchor for every product you present.</em></p>
+
+            <p style="margin-top: 0.85rem;"><strong>The LOOP move</strong> — after they say "home":</p>
+            <div class="qr-verbatim">
+              "Say more about that — what is it about home that matters to you?"
+            </div>
+            <p><em>Then STAY SILENT. Their answer = value-anchor you use at the close.</em></p>
+
+            <p style="margin-top: 0.85rem;"><strong>Hospital consequence — MA prospects only:</strong></p>
+            <div class="qr-verbatim">
+              "If a $1,500 hospital bill landed in your mailbox next month — how would that affect things for you financially?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>★ Family burden consequence — only if family was mentioned in Phase 2 (use EXACT relationship):</strong></p>
+            <div class="qr-verbatim">
+              "You mentioned your [daughter / son / husband / wife — EXACT relationship]. If you needed daily care, is that something you'd want falling on them — or would you rather have something in place so they don't have to quit their job or take unpaid leave to help you?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>The Implication follow-up:</strong></p>
+            <div class="qr-verbatim">
+              "If something like that happened to you and you didn't have a way to cover it — how do you think it would play out?"
+            </div>
+          </div>
+        </article>
+
+        <!-- Phase 5: Pre-Qualify -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">5</span>
+            <h2 class="qr-phase-title">Pre-Qualify <span class="qr-phase-eyebrow">(UW + honest scarcity disclosure)</span></h2>
+            <span class="qr-stage stage-phase">Phase 5</span>
+          </div>
+          <div class="qr-phase-sub">Reframe qualification as advocacy. Underwriting BEFORE the pitch.</div>
+          <div class="qr-phase-body">
+            <p><strong>Transition into qualification:</strong></p>
+            <div class="qr-verbatim">
+              "Before I show you what's available, I need to make sure you actually qualify — because not everyone can get into these programs, and I don't want to waste your time on something you're not eligible for. Can I ask you a few quick health questions?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>HHC Pre-Qualification (UNA633) — all prospects:</strong></p>
+            <ol style="margin: 0.5rem 0 0 1rem;">
+              <li>Q1. Currently in nursing home, ALF, or receiving any home health care now? <em>(Yes = STOP)</em></li>
+              <li>Q2. Need assistance with any ADL: bathing, dressing, eating, continence, toileting, transferring? <em>(Yes = STOP)</em></li>
+              <li>Q3. Past 12 months: Alzheimer's, dementia, or memory loss diagnosed/treated? <em>(Yes = STOP)</em></li>
+              <li>Q4. <em>(Plan C only)</em> Next 60 days: scheduled admission/surgery/home health? <em>(Yes = present Plan A or B instead)</em></li>
+            </ol>
+
+            <p style="margin-top: 0.85rem;"><strong>HI Shield Pre-Qualification (UNA753) — Medicare Advantage prospects only.</strong> 24-month look-back. All 10 must be "no." If they fail HHC, skip HI.</p>
+            <p>See <a href="https://duynomite.github.io/unl-ancillary-playbook/#s5" target="_top" rel="noopener" style="color: #2D5A7A; text-decoration: underline;">Playbook §5</a> for the full HI knockout list.</p>
+
+            <p style="margin-top: 0.85rem;"><strong>★ The honesty checkpoint — say this once, calmly, as advocacy:</strong></p>
+            <div class="qr-verbatim is-pitch">
+              "One thing I want to make sure you understand — these policies are based on your health AT THE TIME you apply. The questions we just walked through? That's a snapshot of today. If something were to come up down the road — a diagnosis, a procedure — we wouldn't be able to put this in place anymore. <strong>I'm not saying this to pressure you. I'm saying it because if I didn't tell you and something happened next year, that wouldn't be fair to you.</strong> Today you qualify. That's the window."
+            </div>
+            <p class="qr-phase-note"><strong>Say this ONCE. Never repeat it.</strong> One mention = honesty. Two = pressure.</p>
+          </div>
+        </article>
+
+        <!-- Phase 6: Solution -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">6</span>
+            <h2 class="qr-phase-title">Solution Presentation <span class="qr-phase-eyebrow">(bridge with their words → HHC → HI → Rx last)</span></h2>
+            <span class="qr-stage stage-phase">Phase 6</span>
+          </div>
+          <div class="qr-phase-sub">Lead with cash benefit. Rx reimbursement is ALWAYS presented last.</div>
+          <div class="qr-phase-body">
+            <p><strong>★ The bridge — restate THEIR EXACT words</strong> (most important sentence in the presentation):</p>
+            <div class="qr-verbatim">
+              "Based on what you've shared with me — <strong>[restate their specific concern verbatim — e.g. 'wanting to stay in your own home,' 'not wanting that to fall on your daughter,' 'the hospital copay being a real problem']</strong> — there's actually a program designed exactly for the gap we just talked about. Would it be worth two minutes to see how it works?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>HHC presentation — lead with this for all prospects:</strong></p>
+            <div class="qr-verbatim">
+              "It's called Home Healthcare Shield. It's a <strong>supplemental indemnity policy, not health insurance</strong>. Unlike your medical plan that pays the doctor or hospital, this program pays cash <strong>directly to you</strong>, up to 360 days. The standard plan pays <strong>$300/day, up to $100,000 total</strong> — with an entry tier at $150/day or a full tier at $450/day depending on your situation. <em>You</em> decide who to hire, when, and how. No requirement to be hospitalized first — a doctor just certifies you need help with daily activities."
+            </div>
+            <div class="qr-verbatim">
+              "And here's something most people love — <strong>if you go 180 days without needing to use it, the benefit fully restores.</strong> So this isn't a one-time payout. It's there for you whenever you need it."
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Family Caregiver benefit (TCare) — only if family mentioned in Phase 2:</strong></p>
+            <div class="qr-verbatim">
+              "You mentioned your [daughter / son / spouse — EXACT relationship]. This plan also includes a <strong>$3,500 lump-sum cash benefit paid directly to a family member</strong> who steps in to help — available up to twice in your lifetime. So if [she/he] had to take time off work, that helps offset what they lose. How would having that change things for your family?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>HI Shield rider — Medicare Advantage prospects only:</strong></p>
+            <div class="qr-verbatim">
+              "We can pair this with a hospital coverage piece — also a <strong>supplemental indemnity policy, not health insurance</strong> — that pays you cash for every day you're in the hospital, <strong>directly offsetting those copays your Advantage plan doesn't cover</strong>. So between the two, you're protected from admission all the way through recovery at home. <strong>The hospital benefit also resets after 60 days without a hospitalization.</strong>"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Rx reimbursement — ALWAYS LAST, always calculated before presenting:</strong></p>
+            <div class="qr-verbatim">
+              "Now — you mentioned you take [their meds]. One of the features is a <strong>prescription reimbursement</strong>. Based on what you take, that's approximately <strong>$[calculated amount]</strong> back in your pocket every year. For a lot of people that actually covers a good chunk of the monthly premium — so the net cost ends up being a lot less than the sticker price."
+            </div>
+            <p><em>Max Rx by tier: Plan A = $300/yr · Plan B = $600/yr · Plan C = $900/yr. Calculate actual meds × $10/generic + $25/brand first. Present NET premium, not gross.</em></p>
+          </div>
+        </article>
+
+        <!-- Phase 7: Commitment -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">7</span>
+            <h2 class="qr-phase-title">Commitment <span class="qr-phase-eyebrow">(Q1-Q4 + tier choice + application)</span></h2>
+            <span class="qr-stage stage-phase">Phase 7</span>
+          </div>
+          <div class="qr-phase-sub">Q1-Q4 close sequence. Tier choice — present highest first, descending.</div>
+          <div class="qr-phase-body">
+            <p><strong>Q1 — the micro-close:</strong></p>
+            <div class="qr-verbatim">
+              "Do you feel like this could be the answer for you?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Q2 — make them defend the yes:</strong></p>
+            <div class="qr-verbatim">
+              "Hold on — why do you feel like it is, though?"
+            </div>
+            <p><em>STAY SILENT after Q2. Don't add to their reason. Their words are stronger than yours.</em></p>
+
+            <p style="margin-top: 0.85rem;"><strong>Q3 — gap-specific recall:</strong></p>
+            <div class="qr-verbatim">
+              "What specific parts of what we went over today do you feel are going to really help you the most?"
+            </div>
+            <p><em>They re-articulate the specific gaps — not generic benefits. If they cite generics, circle back to discovery before closing.</em></p>
+
+            <p style="margin-top: 0.85rem;"><strong>Q4 — final yes:</strong></p>
+            <div class="qr-verbatim">
+              "Do you feel like this is something you can have that'll get you where you want to go?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Tier choice — present highest first, descending:</strong></p>
+            <div class="qr-verbatim">
+              "Which of those feels most comfortable for your situation right now?"
+            </div>
+            <p><em>Let them choose. The act of choosing anchors them emotionally. Any coverage is better than no coverage.</em></p>
+
+            <p style="margin-top: 0.85rem;"><strong>Net cost recap — always after they choose:</strong></p>
+            <div class="qr-verbatim">
+              "So just to recap — [Plan] gives you $[HHC] in home health coverage. The monthly cost is $[gross]. After your prescription reimbursement of about $[Rx/12] per month, you're really looking at <strong>$[net] a month</strong> out of your account. Is $[net] comfortable for you?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Application bridge:</strong></p>
+            <div class="qr-verbatim">
+              "I know you haven't applied for anything like this before — the process is straightforward. It takes about 10 minutes to get you approved and we handle it right now on this call. Do you have about 10 minutes?"
+            </div>
+          </div>
+        </article>
+
+        <!-- Phase 8: Objection Handling -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">8</span>
+            <h2 class="qr-phase-title">Objection Handling <span class="qr-phase-eyebrow">(isolate before responding)</span></h2>
+            <span class="qr-stage stage-phase">Phase 8</span>
+          </div>
+          <div class="qr-phase-sub">Never fold. Respond only to what they actually named.</div>
+          <div class="qr-phase-body">
+            <p><strong>"Let me think about it" / "Call me back":</strong></p>
+            <div class="qr-verbatim">
+              "That's completely fine — I want this to be the right fit. Just so I understand, what is it you're needing to think over? Is it the monthly cost, or is it how the coverage itself works?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>"I already have coverage":</strong></p>
+            <div class="qr-verbatim">
+              "I'm glad to hear that — and I'm not here to replace what's working. Can I ask, does your current plan cover the cost of <strong>daily personal care at home once you leave the hospital</strong>? Not the hospital stay itself — but a caregiver coming to your house. Because that's the specific gap most plans don't cover."
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>"I can't afford it":</strong></p>
+            <div class="qr-verbatim">
+              "I completely hear you — the budget has to make sense. Let me ask you this: if you needed daily care tomorrow and it was running $40 an hour out of pocket, how would that compare to $[Plan A net premium] a month? ... [pause] ... For most people the monthly premium ends up being a fraction of even one week of care."
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>"I need to talk to my spouse/child":</strong></p>
+            <div class="qr-verbatim">
+              "That makes complete sense — especially since this affects them too. Is there any concern about the coverage itself, or is it really just getting their blessing on the decision? ... [if just input] Would it help to set up a quick call where all three of us can be on together?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>★ If they ask about Medicare Advantage mid-call</strong> (the critical compliance moment):</p>
+            <div class="qr-verbatim is-warn">
+              "Great question and yes, we absolutely help with Medicare Advantage — but I have to ask you to give us a separate call to do that properly. <strong>We can't combine those topics on this call.</strong> Here's the number to call: [MA inbound number]. Our Medicare team is great. When you call, just tell them you were talking to me on the ancillary side. They'll take great care of you. Now, while I have you — want to keep going on the Home Healthcare piece we were discussing?"
+            </div>
+            <p class="qr-phase-note"><strong>This routing-out script is mandatory.</strong> The SOA on this call covers ancillary categories only. Pivoting to MA without a new SOA is a compliance violation. Document the MA referral in EnrollHere.</p>
+          </div>
+        </article>
+
+        <!-- Phase 9: Signature + Post-Sale -->
+        <article class="qr-phase-card">
+          <div class="qr-phase-head">
+            <span class="qr-phase-num">9</span>
+            <h2 class="qr-phase-title">Signature + Post-Sale <span class="qr-phase-eyebrow">(close out + chargeback prevention)</span></h2>
+            <span class="qr-stage stage-phase">Phase 9</span>
+          </div>
+          <div class="qr-phase-sub">Signature options + post-sale 60 seconds + retention statement</div>
+          <div class="qr-phase-body">
+            <p><strong>Signature options</strong>: text confirmation code (default — UNL texts code to customer's phone; customer reads it back) OR 3-way call with UNL Agent Service (800-635-1993, fallback).</p>
+
+            <p style="margin-top: 0.85rem;"><strong>Post-sale 60 seconds — chargeback prevention:</strong></p>
+            <div class="qr-verbatim">
+              "Quick recap before we wrap up. Your premium of $[gross] will draft from your bank account on [date]. That's the full premium — drafted in full each month. Every time you fill a prescription, you email the receipt to <strong>claims@unlinsurance.com</strong> with your name, the pharmacy, and the drug name. UNL will mail you a check for $10/generic or $25/brand within 2-3 weeks. Make sense?"
+            </div>
+
+            <p style="margin-top: 0.85rem;"><strong>Retention statement:</strong></p>
+            <div class="qr-verbatim">
+              "And one more thing — you'll get a welcome call from UNL within a week or so, just confirming your coverage. If you ever have an issue or want to make a claim, you call them directly at <strong>800-635-1993</strong>. Save that number — it's also on your policy paperwork. Sound good?"
+            </div>
+          </div>
+        </article>
+
+      </section>
+      <!-- ============ END TAB PANEL 3 ============ -->
 
     </main>
 
